@@ -1,12 +1,11 @@
 from io import BytesIO
 
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.utils.text import slugify
 from PIL import Image
 
-from .constants import MAX_ALT_LENGTH, PRICE_MAX_DECIMALS, PRICE_MAX_DIGITS
-
+from .constants import MAX_ALT_LENGTH, PRICE_MAX_DECIMALS, PRICE_MAX_DIGITS, IMAGE_COMPRESSION_FORMAT, IMAGE_COMPRESSION_QUALITY
 
 
 class TimeStamped(models.Model):
@@ -30,36 +29,34 @@ class BaseModel(TimeStamped):
         return self.name
 
     def save(self, *args, **kwargs):
-        """
-             Autogenerates slug field
-         """
+        """Auto generates slug field"""
         self.slug = slugify(self.name)
         super(BaseModel, self).save(*args, **kwargs)
 
 
 class Category(BaseModel):
-    """
-     The main category for organisationl purposes
-     """
+    """The main category for organisationl purposes"""
     pass
+
+    class Meta:
+        verbose_name_plural = 'Categories'
 
 
 class SubCategory(BaseModel):
-    """
-     Subcategory for organisationl purposes
-     """
+    """Subcategory for organisationl purposes"""
     parent_category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category')
+
+    class Meta:
+        verbose_name_plural = 'Sub categories'
 
 
 class Advertisement(BaseModel):
-    """
-    The core advertisement an user creates
-    """
-    subcategory = models.ForeignKey(SubCategory, on_delete=models.CASCADE, related_name='subcategory')
+    """The core advertisement an user creates"""
+    subcategory = models.ManyToManyField(SubCategory, related_name='subcategory')
     content = models.TextField(null=False)
     views = models.IntegerField(auto_created=True, default=0, null=False)
     importance = models.IntegerField(auto_created=True, default=0, null=False)
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     contact_email = models.EmailField(null=False)
     expires_date = models.DateTimeField()
     expired = models.BooleanField(default=False, null=False)
@@ -76,9 +73,8 @@ class AdvertisementImage(TimeStamped):
     alternate_text = models.CharField(default="", max_length=MAX_ALT_LENGTH)
 
     def save(self, *args, **kwargs):
-        """ Compress the image"""
+        """ Compress image on save"""
         input_image = Image.open(self.image)
         output_image = BytesIO()
-        input_image.save(output_image, format='JPEG', quality=80)
+        input_image.save(output_image, format=IMAGE_COMPRESSION_FORMAT, quality=IMAGE_COMPRESSION_QUALITY)
         super(AdvertisementImage, self).save(*args, **kwargs)
-
