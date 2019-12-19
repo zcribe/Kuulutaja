@@ -1,11 +1,12 @@
+from io import BytesIO
+
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.gis.db.models import PointField
 from django.utils.text import slugify
+from PIL import Image
 
-"""
- Abstract models
- """
+from .constants import MAX_ALT_LENGTH, PRICE_MAX_DECIMALS, PRICE_MAX_DIGITS
+
 
 
 class TimeStamped(models.Model):
@@ -28,18 +29,12 @@ class BaseModel(TimeStamped):
     def __str__(self):
         return self.name
 
-    """
-     Autogenerates slug field
-     """
-
     def save(self, *args, **kwargs):
+        """
+             Autogenerates slug field
+         """
         self.slug = slugify(self.name)
         super(BaseModel, self).save(*args, **kwargs)
-
-
-"""
- Actual DB models
- """
 
 
 class Category(BaseModel):
@@ -68,8 +63,7 @@ class Advertisement(BaseModel):
     contact_email = models.EmailField(null=False)
     expires_date = models.DateTimeField()
     expired = models.BooleanField(default=False, null=False)
-    price = models.DecimalField()
-    location_coordinate = PointField()
+    price = models.DecimalField(decimal_places=PRICE_MAX_DECIMALS, max_digits=PRICE_MAX_DIGITS)
     location_city = models.TextField()
     contact_phone = models.IntegerField()
 
@@ -79,4 +73,12 @@ class AdvertisementImage(TimeStamped):
     description = models.TextField(default="")
     advertisement = models.ForeignKey(Advertisement, on_delete=models.CASCADE, related_name='advertisement')
     image = models.ImageField(null=False)
-    alternate_text = models.CharField(default="", )
+    alternate_text = models.CharField(default="", max_length=MAX_ALT_LENGTH)
+
+    def save(self, *args, **kwargs):
+        """ Compress the image"""
+        input_image = Image.open(self.image)
+        output_image = BytesIO()
+        input_image.save(output_image, format='JPEG', quality=80)
+        super(AdvertisementImage, self).save(*args, **kwargs)
+
