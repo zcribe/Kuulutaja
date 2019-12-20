@@ -1,6 +1,6 @@
 from .base import *
 
-DEBUG = config('DEBUG', cast=bool)
+DEBUG = env('DEBUG', cast=bool)
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases

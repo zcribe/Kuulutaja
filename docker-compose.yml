@@ -1,0 +1,54 @@
+version: '3'
+services:
+  web:
+    image: dev_server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/code
+      - ./logs/web:/logs
+      - ./media:/uploads
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - 8000:8000
+    env_file:
+      - config/settings/.env
+      - .env.docker
+    environment:
+      - BROKER_URL=redis://cache
+      - MEDIA_ROOT=/uploads
+      - LOGS_ROOT=/logs
+    links:
+      - redis:cache
+  worker:
+    image: dev_worker
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/code
+      - ./logs/worker:/logs
+      - ./media:/uploads
+    command: python manage.py celery
+    env_file:
+      - config/settings/.env
+      - .env.docker
+    environment:
+      - BROKER_URL=redis://cache
+      - MEDIA_ROOT=/uploads
+      - LOGS_ROOT=/logs
+    links:
+      - redis:cache
+  redis:
+    image: redis
+    expose:
+      - 6379
+  webpack:
+    image: dev_webpack
+    build:
+      context: .
+      dockerfile: Dockerfile-webpack
+    volumes:
+      - ./assets:/code/assets
+    command: npm run dev

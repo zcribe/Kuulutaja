@@ -19,12 +19,12 @@ import django
 import sphinx_rtd_theme
 
 sys.path.insert(0, os.path.abspath('..'))
-os.environ['DJANGO_SETTINGS_MODULE'] = 'ClassifiedAds.settings.production'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'config.settings.production'
 django.setup()
 
 # -- Project information -----------------------------------------------------
 
-project = 'ClassifiedAds'
+project = 'config'
 copyright = '2019, Erlend Eelmets'
 author = 'Erlend Eelmets'
 
