@@ -3,28 +3,22 @@ from io import BytesIO
 from django.db import models
 from django.conf import settings
 from django.utils.text import slugify
+from django.db import IntegrityError
 from taggit.managers import TaggableManager
 from PIL import Image
+from model_utils.models import StatusModel, TimeStampedModel, SoftDeletableModel
+from model_utils import Choices
+from model_utils.managers import QueryManager
 
 from .constants import MAX_ALT_LENGTH, PRICE_MAX_DECIMALS, PRICE_MAX_DIGITS, IMAGE_COMPRESSION_FORMAT, \
     IMAGE_COMPRESSION_QUALITY
 
 
-class TimeStamped(models.Model):
-    """ Abstract timestamping model"""
-    created_date = models.DateTimeField(auto_now_add=True)
-    modified_date = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        abstract = True
-
-
-class BaseModel(TimeStamped):
+class BaseModel(TimeStampedModel, StatusModel, SoftDeletableModel):
     """ Abstract core model for every class """
+    STATUS = Choices('draft', 'published', 'expired')
     name = models.CharField(null=False, max_length=150)
-    slug = models.SlugField(default="", editable=False, unique=True)
-    draft = models.BooleanField(default=True, null=False)
-    published = models.BooleanField(default=False, null=False)
+    slug = models.SlugField(default="", unique=True)
 
     class Meta:
         abstract = True
@@ -34,13 +28,18 @@ class BaseModel(TimeStamped):
 
     def save(self, *args, **kwargs):
         """Auto generates slug field"""
-        self.slug = slugify(self.name)
-        super(BaseModel, self).save(*args, **kwargs)
+        try:
+            self.slug = slugify(self.name)
+            super(BaseModel, self).save(*args, **kwargs)
+        except IntegrityError as e:
+            if 'unique constrain' in e.args:
+                slug = f"{self.name}{self.pk}"
+                self.slug = slugify(slug)
+                super(BaseModel, self).save(*args, **kwargs)
 
 
 class Category(BaseModel):
     """The main category for organisationl purposes"""
-    pass
 
     class Meta:
         verbose_name_plural = 'Categories'
@@ -56,10 +55,9 @@ class SubCategory(BaseModel):
 
 class Advertisement(BaseModel):
     """The core advertisement an user creates"""
-    expired = models.BooleanField(default=False, null=False)
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     contact_email = models.EmailField(null=False)
-    contact_phone = models.IntegerField()
+    contact_phone = models.CharField(max_length=100)
     subcategory = models.ManyToManyField(SubCategory, related_name='subcategory')
     content = models.TextField(null=False)
     views = models.IntegerField(auto_created=True, default=0, null=False, editable=False)
@@ -68,18 +66,22 @@ class Advertisement(BaseModel):
     price = models.DecimalField(decimal_places=PRICE_MAX_DECIMALS, max_digits=PRICE_MAX_DIGITS)
     location_city = models.CharField(max_length=100)
     users_interested = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='users_interested', blank=True)
+    published_date = models.DateTimeField(blank=True, null=True)
+
     tags = TaggableManager()
+    objects = models.Manager()
+    public = QueryManager(published=True, is_removed=False).order_by('-published_date')
 
     class Meta:
-        ordering = ['-created_date']
+        ordering = ['-created']
 
 
-class AdvertisementImage(TimeStamped):
+class AdvertisementImage(TimeStampedModel):
     """ Single image on advertisement"""
     description = models.CharField(default="", max_length=150)
     alternate_text = models.CharField(default="", max_length=MAX_ALT_LENGTH)
     parent_advertisement = models.ForeignKey(Advertisement, on_delete=models.CASCADE, related_name='advertisement')
-    image = models.ImageField(null=False)
+    image = models.ImageField(null=False, upload_to='ads/')
 
     def save(self, *args, **kwargs):
         """ Compress image on save"""
@@ -89,7 +91,3 @@ class AdvertisementImage(TimeStamped):
         super(AdvertisementImage, self).save(*args, **kwargs)
 
 
-class PublishedAdvertisementsManager(models.Manager):
-    """ Returns all published advertisement objects """
-    def get_queryset(self):
-        return super(PublishedAdvertisementsManager, self).get_queryset().filter(status='published')
