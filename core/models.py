@@ -11,6 +11,7 @@ from .constants import MAX_ALT_LENGTH, PRICE_MAX_DECIMALS, PRICE_MAX_DIGITS, IMA
 
 
 class TimeStamped(models.Model):
+    """ Abstract timestamping model"""
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
 
@@ -19,6 +20,7 @@ class TimeStamped(models.Model):
 
 
 class BaseModel(TimeStamped):
+    """ Abstract core model for every class """
     name = models.CharField(null=False, max_length=150)
     slug = models.SlugField(default="", editable=False, unique=True)
     draft = models.BooleanField(default=True, null=False)
@@ -88,5 +90,6 @@ class AdvertisementImage(TimeStamped):
 
 
 class PublishedAdvertisementsManager(models.Manager):
+    """ Returns all published advertisement objects """
     def get_queryset(self):
         return super(PublishedAdvertisementsManager, self).get_queryset().filter(status='published')
