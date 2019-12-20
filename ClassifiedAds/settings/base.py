@@ -56,7 +56,10 @@ ROOT_URLCONF = 'ClassifiedAds.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, '../../templates')]
+        'DIRS': [
+            os.path.join(BASE_DIR, '../../templates'),
+            os.path.join(BASE_DIR, 'templates')
+        ]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -107,4 +110,11 @@ INSTALLED_APPS += [
     'allauth.socialaccount.providers.facebook',
     'allauth.socialaccount.providers.vk',
     'allauth.socialaccount.providers.instagram',
+]
+
+# DJANGO TAGGIT
+TAGGIT_CASE_INSENSITIVE = True
+
+INSTALLED_APPS += [
+    'taggit'
 ]

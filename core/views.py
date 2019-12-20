@@ -8,12 +8,12 @@ from .models import Category, SubCategory, Advertisement
 
 class CategoryView(ListView):
     model = Category
-    template_name = 'category_list.html'
+    template_name = 'core/category_list.html'
 
 
 class AdvertListView(ListView):
     model = Advertisement
-    template_name = 'advert_list.html'
+    template_name = 'core/advert_list.html'
 
 
 class AdvertDetailView(DetailView):
