@@ -104,3 +104,4 @@ celery==4.4.0
 redis==3.3.11
 flower==0.9.3
 django-celery-results==1.1.2
+django-celery-email==3.0.0

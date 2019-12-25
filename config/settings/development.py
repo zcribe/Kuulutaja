@@ -17,7 +17,10 @@ DATABASES = {
 }
 INSTALLED_APPS += [
     'debug_toolbar',
+    'djcelery_email'
 ]
+
+EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
 
 MIDDLEWARE = [
                  'debug_toolbar.middleware.DebugToolbarMiddleware',
@@ -26,3 +29,4 @@ MIDDLEWARE = [
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
