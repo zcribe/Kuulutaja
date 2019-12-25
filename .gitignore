@@ -210,3 +210,25 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+.idea/ClassifiedAds.iml
+.idea/inspectionProfiles/
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+core/migrations/0001_initial.py
+core/migrations/0002_auto_20191219_1701.py
+core/migrations/0003_auto_20191219_1708.py
+core/migrations/0004_auto_20191219_1826.py
+core/migrations/0005_auto_20191219_1828.py
+core/migrations/0006_auto_20191219_1831.py
+core/migrations/0007_auto_20191219_1832.py
+core/migrations/0008_auto_20191220_1207.py
+core/migrations/0009_auto_20191220_1214.py
+core/migrations/0010_auto_20191220_1240.py
+core/migrations/0011_auto_20191220_1317.py
+docs/_static/
+docs/_templates/
+media/
+static/
+templates/
+.env.dev

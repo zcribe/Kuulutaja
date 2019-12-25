@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import environ
+from celery.schedules import crontab
 
 env = environ.Env()
 environ.Env.read_env()
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django_celery_results',
 
     'core',
     'flatpages'
@@ -122,4 +124,16 @@ INSTALLED_APPS += [
     'taggit'
 ]
 
+# CELERY
 CELERY_BROKER_URL = env('CELERY_BROKER_URL')
+CELERY_RESULT_BACKEND = env('CELERY_RESULT_BACKEND')
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+
+CELERY_BEAT_SCHEDULE = {
+    'hello': {
+        'task': 'core.tasks.',
+        'schedule': crontab()  # execute every minute
+    }
+}
