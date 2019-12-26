@@ -105,3 +105,6 @@ redis==3.3.11
 flower==0.9.3
 django-celery-results==1.1.2
 django-celery-email==3.0.0
+django-phonenumber-field==4.0.0
+phonenumbers==8.11.1
+psycopg2==2.8.4

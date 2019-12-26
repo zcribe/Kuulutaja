@@ -8,6 +8,7 @@ ADVERTISEMENTS_IMAGES = 1000
 
 
 class Command(BaseCommand):
+    """ Creates dummy data for testing """
     help = "Generate testing data for the app"
 
     def handle(self, *args, **options):

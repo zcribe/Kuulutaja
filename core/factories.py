@@ -19,7 +19,7 @@ Internet = Internet(LOCALE)
 
 class CategoryFactory(factory.django.DjangoModelFactory):
     """ Generates dummy category object """
-    name = Text.title()
+    name = factory.Faker('')
 
     class Meta:
         model = Category
@@ -27,7 +27,7 @@ class CategoryFactory(factory.django.DjangoModelFactory):
 
 class SubCategoryFactory(factory.django.DjangoModelFactory):
     """ Generates dummy subcategory object """
-    name = Text.title()
+    name = Text.word().capitalize()
     parent_category = factory.iterator(Category.objects.all)
 
     class Meta:
@@ -36,8 +36,8 @@ class SubCategoryFactory(factory.django.DjangoModelFactory):
 
 class AdvertisementFactory(factory.django.DjangoModelFactory):
     """ Generates dummy advertisement object """
-    name = Text.title()
-    owner = factory.iterator(User.objects.all)
+    name = " ".join(Text.words(3))
+    owner = factory.iterator(User.objects.all)  # !TODO: If iterator is empty then creation crashes
     contact_email = Person.email()
     contact_phone = Person.telephone()
     content = Text.text(random.randint(3, 20))
@@ -61,8 +61,8 @@ class AdvertisementFactory(factory.django.DjangoModelFactory):
 
 class AdvertisementImageFactory(factory.django.DjangoModelFactory):
     """ Generates dummy advertisement image object """
-    description = Text.title()
-    alternate_text = Text.title()
+    description = " ".join(Text.words(2))
+    alternate_text = " ".join(Text.words(2))
     parent_advertisement = factory.iterator(Advertisement.objects.all)
     image = factory.django.ImageField()
 

@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django_celery_results',
 
+    'phonenumber_field',
+
     'core',
     'flatpages'
 ]
