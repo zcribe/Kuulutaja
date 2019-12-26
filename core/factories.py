@@ -1,7 +1,6 @@
 import random
 
 import factory
-from mimesis import Business, Address, Text, Person, Datetime, Internet
 from django.contrib.auth.models import User
 
 from .models import Category, SubCategory, Advertisement, AdvertisementImage
@@ -9,17 +8,10 @@ from .models import Category, SubCategory, Advertisement, AdvertisementImage
 LOCALE = 'et'
 TIMEZONE = 'Europe/Tallinn'
 
-Business = Business(LOCALE)
-Address = Address(LOCALE)
-Text = Text(LOCALE)
-Person = Person(LOCALE)
-Datetime = Datetime(LOCALE)
-Internet = Internet(LOCALE)
-
 
 class CategoryFactory(factory.django.DjangoModelFactory):
     """ Generates dummy category object """
-    name = factory.Faker('')
+    name = factory.Faker('word')
 
     class Meta:
         model = Category
@@ -27,7 +19,7 @@ class CategoryFactory(factory.django.DjangoModelFactory):
 
 class SubCategoryFactory(factory.django.DjangoModelFactory):
     """ Generates dummy subcategory object """
-    name = Text.word().capitalize()
+    name = factory.Faker('word')
     parent_category = factory.iterator(Category.objects.all)
 
     class Meta:
@@ -36,16 +28,16 @@ class SubCategoryFactory(factory.django.DjangoModelFactory):
 
 class AdvertisementFactory(factory.django.DjangoModelFactory):
     """ Generates dummy advertisement object """
-    name = " ".join(Text.words(3))
+    name = factory.Faker('sentence')
     owner = factory.iterator(User.objects.all)  # !TODO: If iterator is empty then creation crashes
-    contact_email = Person.email()
-    contact_phone = Person.telephone()
-    content = Text.text(random.randint(3, 20))
-    views = random.randint(0, 9000)
-    importance = random.randint(0, 9000)
-    expires_date = Datetime.datetime(timezone=TIMEZONE)
-    price = random.randint(1, 90000)
-    location_city = Address.city()
+    contact_email = factory.Faker('ascii_free_email')
+    contact_phone = factory.Faker('phone_number')
+    content = factory.Faker('text')
+    views = factory.Faker('random_int')
+    importance = factory.Faker('random_int')
+    expires_date = factory.Faker('date_time_this_month')
+    price = factory.Faker('random_int')
+    location_city = factory.Faker('address')
     status = 'published'
 
     @factory.post_generation
@@ -61,8 +53,8 @@ class AdvertisementFactory(factory.django.DjangoModelFactory):
 
 class AdvertisementImageFactory(factory.django.DjangoModelFactory):
     """ Generates dummy advertisement image object """
-    description = " ".join(Text.words(2))
-    alternate_text = " ".join(Text.words(2))
+    description = factory.Faker('word')
+    alternate_text = factory.Faker('word')
     parent_advertisement = factory.iterator(Advertisement.objects.all)
     image = factory.django.ImageField()
 
