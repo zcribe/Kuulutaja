@@ -63,6 +63,7 @@ Dockerfile
 docker-compose.yml
 docker-compose.override.yml
 docker/docker-compose.prod.yml
+docker-bench-security
 
 # JetBrains
 .idea/

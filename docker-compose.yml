@@ -3,7 +3,7 @@ version: '3'
 services:
   # PostgreSQL - Database
   db:
-    image: postgres:latest
+    image: postgres:12-alpine
     container_name: db
     hostname: db
     environment:
@@ -18,8 +18,8 @@ services:
 
   # Redis - Cache & Celery backend
   redis:
+    image: redis:buster
     container_name: redis
-    image: redis:latest
     ports:
       - "6379:6379"
 

@@ -1,6 +1,6 @@
 from celery import shared_task
 
 
-@shared_task
-def hello():
-    print("Hellp there!")
+# @shared_task
+# def hello():
+#     print("Hellp there!")

@@ -232,3 +232,4 @@ media/
 static/
 templates/
 .env.dev
+docker-bench-security/
