@@ -7,11 +7,6 @@ class CategoryAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(SubCategory)
-class SubCategoryAdmin(admin.ModelAdmin):
-    pass
-
-
 @admin.register(Advertisement)
 class AdvertisementAdmin(admin.ModelAdmin):
     pass

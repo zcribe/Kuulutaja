@@ -21,16 +21,17 @@ RUN apk update \
   && apk add libffi-dev py-cffi
 
 # Requirements are installed.
-RUN mkdir /requirements
-WORKDIR /requirements
-COPY requirements.txt /requirements/
+RUN mkdir /code
+WORKDIR /code
+COPY requirements.txt /code/
 RUN pip install --no-cache-dir -r requirements.txt
+COPY . /code/
 
-# Least priviliged user
-RUN mkdir /app
-RUN addgroup -S django \
-    && adduser -S -G django django
-WORKDIR /app
-COPY . /app
-RUN chown -R django:django /app
-USER django
+## Least priviliged user
+#RUN mkdir /app
+#RUN addgroup -S django \
+#    && adduser -S -G django django
+#WORKDIR /app
+#COPY . /app
+#RUN chown -R django:django /app
+#USER django

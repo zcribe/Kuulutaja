@@ -9,11 +9,11 @@ from PIL import Image
 from model_utils.models import StatusModel, TimeStampedModel, SoftDeletableModel
 from model_utils import Choices
 from model_utils.managers import QueryManager
-
+from treebeard.mp_tree import MP_Node
 from phonenumber_field.modelfields import PhoneNumberField
 
 from .constants import MAX_ALT_LENGTH, PRICE_MAX_DECIMALS, PRICE_MAX_DIGITS, IMAGE_COMPRESSION_FORMAT, \
-    IMAGE_COMPRESSION_QUALITY, NAME_MAX_LENGTH, SLUG_MAX_LENGTH,  CITY_MAX_LENGTH, \
+    IMAGE_COMPRESSION_QUALITY, NAME_MAX_LENGTH, SLUG_MAX_LENGTH, CITY_MAX_LENGTH, \
     AD_DESCRIPTION_MAX_LENGTH
 
 
@@ -50,19 +50,12 @@ class BaseModel(TimeStampedModel, StatusModel, SoftDeletableModel):
                 super(BaseModel, self).save(*args, **kwargs)
 
 
-class Category(BaseModel):
-    """The main category for organisationl purposes"""
+class Category(MP_Node, BaseModel):
+    """The main category for organisational purposes"""
+    node_order_by = ['name']
 
     class Meta:
         verbose_name_plural = 'Categories'
-
-
-class SubCategory(BaseModel):
-    """Subcategory for organisationl purposes"""
-    parent_category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category')
-
-    class Meta:
-        verbose_name_plural = 'Sub categories'
 
 
 class Advertisement(BaseModel):
@@ -70,7 +63,7 @@ class Advertisement(BaseModel):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     contact_email = models.EmailField(null=False)
     contact_phone = PhoneNumberField(blank=True)
-    subcategory = models.ManyToManyField(SubCategory, related_name='subcategory')
+    category = models.ForeignKey(to=Category, related_name='subcategory', on_delete=models.CASCADE)
     content = models.TextField(null=False)
     views = models.IntegerField(auto_created=True, default=0, null=False, editable=False)
     importance = models.IntegerField(auto_created=True, default=0, null=False)

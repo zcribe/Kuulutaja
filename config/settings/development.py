@@ -1,4 +1,5 @@
 from .base import *
+import socket
 
 DEBUG = env('DEBUG', cast=bool)
 
@@ -30,3 +31,11 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
+# Debugtoolbar for Docker
+DEBUG_TOOLBAR_CONFIG = {
+    "DISABLE_PANELS": ["debug_toolbar.panels.redirects.RedirectsPanel"],
+    "SHOW_TEMPLATE_CONTEXT": True,
+}
+
+hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+INTERNAL_IPS += [ip[:-1] + "1" for ip in ips]
