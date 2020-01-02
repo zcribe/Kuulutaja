@@ -9,12 +9,12 @@
     {#        {{ annotated_list }}#}
 
 
-    <div style="display: flex; flex-direction: row; align-content: space-between; flex-wrap: wrap;justify-content: space-between;">
+    <div style="display: flex; flex-direction: row; align-content: space-between; flex-wrap: wrap;justify-content: space-between; margin: 5rem 0">
         {% for item, info in annotated_list %}
             {% if info.level == 0 %}
                 <div class="card" style="width: 18rem;">
                 <div class="card-body">
-                <ul style="list-style-type: none;">
+                <ul class="list-unstyled">
             {% endif %}
         {% if info.level == 1 %}
             <h5 class="card-title">{{ item }}</h5>
@@ -45,7 +45,7 @@
             </ul></div></div>
             <div class="card" style="width: 18rem;">
             <div class="card-body">
-            <ul style="list-style-type: none;">
+            <ul class="list-unstyled">
         {% endif %}
         {% endfor %}
         </div>
@@ -70,20 +70,27 @@
     {#    {% endfor %}#}
     {#    {% endfor %}#}
 
+
     <div style="display: flex; flex-direction: row; align-content: space-between; flex-wrap: wrap;justify-content: space-between;">
         {% for ad in ads %}
-            <div class="card" style="width: 10rem;">
-                <img src="{{ ad.advertisementimage_set.first.image }}" alt="">
-                <div class="card-body">
-                    <h5 class="card-title">{{ ad.name }}  Hind:  {{ ad.price }} €</h5>
-                    <p class="card-text">
-                        {{ ad.content }}
-                    </p>
-                    <a href="#" class="btn btn-primary">Vaata kuulutust</a>
+            <a href="">
+                <div class="card" style="width: 10rem;">
+                    <img src="{% static ad.advertisement.first.image.url %}" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title lead">{{ ad.name }}  </h5>
+                        {% if ad.price != "." %}
+                            <small>{{ ad.price }}€</small>
+                        {% endif %}
+
+                        <p class="card-text">
+                            {{ ad.content|truncatewords:10 }}
+                        </p>
+                    </div>
                 </div>
-            </div>
+            </a>
         {% endfor %}
     </div>
+
 
 {% endblock content %}
 

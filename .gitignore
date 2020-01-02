@@ -230,6 +230,5 @@ docs/_static/
 docs/_templates/
 media/
 static/
-templates/
 .env.dev
 docker-bench-security/
