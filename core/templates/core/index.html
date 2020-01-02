@@ -1,0 +1,89 @@
+{% extends 'core/base2.html' %}
+{% load static %}
+
+{% block content %}
+    {#        {% for item, info in annotated_list %}#}
+    {#            {{ item }}#}
+    {#        {% endfor %}#}
+
+    {#        {{ annotated_list }}#}
+
+
+    <div style="display: flex; flex-direction: row; align-content: space-between; flex-wrap: wrap;justify-content: space-between;">
+        {% for item, info in annotated_list %}
+            {% if info.level == 0 %}
+                <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                <ul style="list-style-type: none;">
+            {% endif %}
+        {% if info.level == 1 %}
+            <h5 class="card-title">{{ item }}</h5>
+        {% elif info.level == 2 %}
+            <a href="">
+                <li>{{ item }}</li>
+            </a>
+        {% elif info.level == 2 and info.open %}
+            <ul>
+                <a href="">
+                    <li>{{ item }}</li>
+                </a>
+                {% elif info.level == 2  and not info.open %}
+
+                <a href="">
+                    <li>{{ item }}</li>
+                </a>
+            </ul>
+        {% endif %}
+
+
+
+        {% if 1 in info.close %}
+            </ul></div></div>
+        {% elif  2 in info.close %}
+            </ul></ul></div></div>
+        {% elif 0 in info.close %}
+            </ul></div></div>
+            <div class="card" style="width: 18rem;">
+            <div class="card-body">
+            <ul style="list-style-type: none;">
+        {% endif %}
+        {% endfor %}
+        </div>
+
+
+
+
+    {#    {% for item, info in annotated_list %}#}
+    {#        {% if info.open %}#}
+    {#            <ul>#}
+    {#            <li>#}
+    {#                {% else %}#}
+    {#            </li>#}
+    {#            <li>#}
+    {#        {% endif %}#}
+    {#    {% if info.level > 0 %}#}
+    {#        {{ item }}#}
+    {#    {% endif %}#}
+    {##}
+    {#    {% for close in info.close %}#}
+    {#        </li></ul>#}
+    {#    {% endfor %}#}
+    {#    {% endfor %}#}
+
+    <div style="display: flex; flex-direction: row; align-content: space-between; flex-wrap: wrap;justify-content: space-between;">
+        {% for ad in ads %}
+            <div class="card" style="width: 10rem;">
+                <img src="{{ ad.advertisementimage_set.first.image }}" alt="">
+                <div class="card-body">
+                    <h5 class="card-title">{{ ad.name }}  Hind:  {{ ad.price }} €</h5>
+                    <p class="card-text">
+                        {{ ad.content }}
+                    </p>
+                    <a href="#" class="btn btn-primary">Vaata kuulutust</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock content %}
+
