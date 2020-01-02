@@ -97,3 +97,4 @@ class AdvertisementImage(TimeStampedModel):
         output_image = BytesIO()
         input_image.save(output_image, format=IMAGE_COMPRESSION_FORMAT, quality=IMAGE_COMPRESSION_QUALITY)
         super(AdvertisementImage, self).save(*args, **kwargs)
+

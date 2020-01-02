@@ -11,15 +11,11 @@ class IndexView(ListView):
     model = Category
     template_name = 'core/index.html'
 
-
-class CategoryView(ListView):
-    model = Category
-    template_name = 'core/category_list.html'
-    category = ''
-
-    def get_queryset(self):
-        self.category = get_object_or_404(Category, id=self.kwargs['pk'])
-        return Category.objects.filter(id=self.kwargs['pk']).prefetch_related('subcategory_set')
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context['annotated_list'] = Category.get_annotated_list()
+        context['ads'] = Advertisement.objects.filter(status='published').order_by('published_date')[:100]
+        return context
 
 
 class AdvertListView(ListView):
