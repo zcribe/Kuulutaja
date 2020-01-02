@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
-from core.factories import CategoryFactory, AdvertisementFactory, AdvertisementImageFactory
+from core.factories import category_factory, AdvertisementFactory, AdvertisementImageFactory
 
 CATEGORIES = 10
 ADVERTISEMENTS = 500
@@ -11,9 +11,8 @@ class Command(BaseCommand):
     help = "Generate testing data for the app"
 
     def handle(self, *args, **options):
-        CategoryFactory.create_batch(size=CATEGORIES)
-        self.stdout.write(self.style.SUCCESS(f'{CATEGORIES} categories generated'))
-
+        cats = category_factory(size=CATEGORIES)
+        self.stdout.write(self.style.SUCCESS(f'{cats} categories generated'))
         AdvertisementFactory.create_batch(size=ADVERTISEMENTS)
         self.stdout.write(self.style.SUCCESS(f'{ADVERTISEMENTS} advertisements generated'))
         AdvertisementImageFactory.create_batch(size=ADVERTISEMENTS_IMAGES)

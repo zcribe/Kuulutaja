@@ -1,7 +1,6 @@
-import random
-
 import factory
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 from .models import Category, Advertisement, AdvertisementImage
 
@@ -9,12 +8,21 @@ LOCALE = 'et'
 TIMEZONE = 'Europe/Tallinn'
 
 
-class CategoryFactory(factory.django.DjangoModelFactory):
-    """ Generates dummy category object """
-    name = factory.Faker('word')
+def category_factory(size):
+    """ Generates dummy category objects """
+    count = 0
 
-    class Meta:
-        model = Category
+    root = Category.add_root(name='root_category')
+    count += 1
+
+    for _ in range(1, size):
+        child = root.add_child(name=factory.Faker('word').generate().capitalize())
+        count += 1
+        for _ in range(1, size):
+            child.add_child(name=factory.Faker('word').generate().capitalize())
+            count += 1
+
+    return count
 
 
 class AdvertisementFactory(factory.django.DjangoModelFactory):
@@ -27,7 +35,7 @@ class AdvertisementFactory(factory.django.DjangoModelFactory):
     content = factory.Faker('text')
     views = factory.Faker('random_int')
     importance = factory.Faker('random_int')
-    expires_date = factory.Faker('date_time_this_month')
+    expires_date = factory.Faker('date_time_this_month', tzinfo=timezone.get_current_timezone())
     price = factory.Faker('random_int')
     location_city = factory.Faker('address')
     status = 'published'
