@@ -75,7 +75,7 @@ class Advertisement(BaseModel):
 
     tags = TaggableManager()
     objects = models.Manager()
-    public = QueryManager(published=True, is_removed=False).order_by('-published_date')
+    public = QueryManager(status='published').order_by('-published_date')
 
     class Meta:
         ordering = ['-created']
