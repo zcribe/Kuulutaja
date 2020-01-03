@@ -19,7 +19,7 @@
         {% if info.level == 1 %}
             <h5 class="card-title">{{ item }}</h5>
         {% elif info.level == 2 %}
-            <a href="">
+            <a href="{{ item.slug }}">
                 <li>{{ item }}</li>
             </a>
         {% elif info.level == 2 and info.open %}
@@ -73,7 +73,7 @@
 
     <div style="display: flex; flex-direction: row; align-content: space-between; flex-wrap: wrap;justify-content: space-between;">
         {% for ad in ads %}
-            <a href="">
+            <a href="advertisement/{{ ad.slug }}">
                 <div class="card" style="width: 10rem;">
                     <img src="{% static ad.advertisement.first.image.url %}" alt="">
                     <div class="card-body">
