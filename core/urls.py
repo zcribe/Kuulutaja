@@ -8,5 +8,4 @@ urlpatterns = [
     path('advertisement/<str:slug>/create/', AdvertCreateView.as_view(), name='ad-create'),
     path('advertisement/<str:slug>/update/', AdvertUpdateView.as_view(), name='ad-update'),
     path('advertisement/<str:slug>/delete/', AdvertDeleteView.as_view(), name='ad-delete'),
-
 ]

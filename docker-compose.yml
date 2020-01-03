@@ -74,5 +74,7 @@ services:
     links:
       - redis
 
+
 volumes:
+  solr:
   postgresql-data:

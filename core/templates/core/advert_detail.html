@@ -1,10 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'core/base2.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block content %}
+
+
+    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            {% for pictures in advertisement.advertisement.all %}
+                <div class="carousel-item active">
+                    <img src="{{ pictures.url }}" class="d-block w-100" alt="{{ pictures.alternate_text }}">
+                </div>
+            {% endfor %}
+
+        </div>
+    </div>
+    <h1>{{ advertisement.name }}</h1>
+    <h2>{{ advertisement.price }}</h2>
+    <h3>{{ advertisement.contact_phone }}</h3>
+    <h3>{{ advertisement.contact_email }}</h3>
+    <small>{{ advertisement.published_date }}</small>
+    <small>{{ advertisement.location_city }}</small>
+    <p>{{ advertisement.content }}</p>
+
+
+
+
+
+
+    {{ advertisement.views }}
+
+{% endblock %}

@@ -26,25 +26,25 @@ class AdvertListView(ListView):
 class AdvertDetailView(DetailView):
     """ Read Ad"""
     model = Advertisement
-    template_name = 'advert_detail.html'
+    template_name = 'core/advert_detail.html'
 
 
 @method_decorator(login_required, name='dispatch')
 class AdvertCreateView(CreateView):
     """ Create Ad"""
     model = Advertisement
-    template_name = 'advert_create.html'
+    template_name = 'core/advert_create.html'
 
 
 @method_decorator(login_required, name='dispatch')
 class AdvertDeleteView(DeleteView):
     """ Delete Ad """
     model = Advertisement
-    template_name = 'advert_delete.html'
+    template_name = 'core/advert_delete.html'
 
 
 @method_decorator(login_required, name='dispatch')
 class AdvertUpdateView(UpdateView):
     """ Update Ad """
     model = Advertisement
-    template_name = 'advert_update.html'
+    template_name = 'core/advert_update.html'
