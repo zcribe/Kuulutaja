@@ -8,7 +8,7 @@
 
     {#        {{ annotated_list }}#}
 
-
+    <h2>Categories</h2>
     <div style="display: flex; flex-direction: row; align-content: space-between; flex-wrap: wrap;justify-content: space-between; margin: 5rem 0">
         {% for item, info in annotated_list %}
             {% if info.level == 0 %}
@@ -19,7 +19,7 @@
         {% if info.level == 1 %}
             <h5 class="card-title">{{ item }}</h5>
         {% elif info.level == 2 %}
-            <a href="{{ item.slug }}">
+            <a href="/category/{{ item.slug }}">
                 <li>{{ item }}</li>
             </a>
         {% elif info.level == 2 and info.open %}
@@ -52,29 +52,12 @@
 
 
 
-
-    {#    {% for item, info in annotated_list %}#}
-    {#        {% if info.open %}#}
-    {#            <ul>#}
-    {#            <li>#}
-    {#                {% else %}#}
-    {#            </li>#}
-    {#            <li>#}
-    {#        {% endif %}#}
-    {#    {% if info.level > 0 %}#}
-    {#        {{ item }}#}
-    {#    {% endif %}#}
-    {##}
-    {#    {% for close in info.close %}#}
-    {#        </li></ul>#}
-    {#    {% endfor %}#}
-    {#    {% endfor %}#}
-
-
-    <div style="display: flex; flex-direction: row; align-content: space-between; flex-wrap: wrap;justify-content: space-between;">
+    <h2>Advertisements</h2>
+    <div class="card-columns">
         {% for ad in ads %}
-            <a href="advertisement/{{ ad.slug }}">
-                <div class="card" style="width: 10rem;">
+
+            <div class="card">
+                <a href="advertisement/{{ ad.slug }}">
                     <img src="{% static ad.advertisement.first.image.url %}" alt="">
                     <div class="card-body">
                         <h5 class="card-title lead">{{ ad.name }}  </h5>
@@ -86,10 +69,13 @@
                             {{ ad.content|truncatewords:10 }}
                         </p>
                     </div>
-                </div>
-            </a>
+                </a>
+            </div>
+
         {% endfor %}
+
     </div>
+
 
 
 {% endblock content %}

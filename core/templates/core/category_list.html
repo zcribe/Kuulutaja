@@ -1,10 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'core/base2.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block content %}
+
+
+    <h2>Advertisements</h2>
+    <div class="card-columns">
+        {% for ad in object_list %}
+
+            <div class="card">
+                <a href="/advertisement/{{ ad.slug }}">
+                    <img src="{% static ad.advertisement.first.image.url %}" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title lead">{{ ad.name }}  </h5>
+                        {% if ad.price != "." %}
+                            <small>{{ ad.price }}€</small>
+                        {% endif %}
+
+                        <p class="card-text">
+                            {{ ad.content|truncatewords:10 }}
+                        </p>
+                    </div>
+                </a>
+            </div>
+
+        {% endfor %}
+    </div>
+
+
+{% endblock %}

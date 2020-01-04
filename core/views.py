@@ -30,6 +30,14 @@ class AdvertDetailView(DetailView):
     template_name = 'core/advert_detail.html'
 
 
+class CategoryView(ListView):
+    model = Advertisement
+    template_name = 'core/category_list.html'
+
+    def get_queryset(self):
+        return Advertisement.public.filter(category__slug__iexact=self.kwargs['slug'])
+
+
 class SearchResultsView(ListView):
     """ Display Advertisements filtered by the search """
     model = Advertisement
@@ -44,12 +52,11 @@ class SearchResultsView(ListView):
             query = SearchQuery(search_terms)
             name_vector = SearchVector('name', weight='A')
             content_vector = SearchVector('content', weight='B')
-            core_vector = name_vector + content_vector
+            location_vector = SearchVector('location_city', weight='C')
+            core_vector = name_vector + content_vector + location_vector
             queryset = queryset.annotate(search=core_vector).filter(search=query)
             queryset = queryset.annotate(rank=SearchRank(core_vector, query)).order_by('-rank')
         return queryset
-
-
 
 
 @method_decorator(login_required, name='dispatch')
