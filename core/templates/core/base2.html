@@ -1,4 +1,5 @@
 {% load static %}
+{% load account %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -49,7 +50,10 @@
         </form>
         <ul class="navbar-nav">
             {% if user.is_authenticated %}
-                <li class="nav-item"><a href="" class="nav-link">Profile</a></li>
+                <li class="nav-item"><a href="" class="nav-link">Add new</a>
+                </li>
+                <li class="nav-item"><a href="{% url 'profile' user.id %}" class="nav-link">{% user_display user %}</a>
+                </li>
                 <li class="nav-item"><a href="{% url 'account_email' %}" class="nav-link">Change E-mail</a></li>
                 <li class="nav-item"><a href="{% url 'account_logout' %}" class="nav-link">Sign Out</a></li>
             {% else %}

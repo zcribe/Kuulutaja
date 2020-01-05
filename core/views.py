@@ -6,6 +6,8 @@ from django.utils.decorators import method_decorator
 from django.contrib.postgres.search import SearchQuery, SearchVector, SearchRank
 from django.db.models import Prefetch
 
+from allauth.account.decorators import verified_email_required
+
 from .models import Category, Advertisement, AdvertisementImage
 
 

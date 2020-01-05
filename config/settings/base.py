@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'treebeard',
 
     'core',
+    'users',
     'flatpages'
 ]
 
