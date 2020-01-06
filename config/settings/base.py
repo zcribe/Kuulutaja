@@ -20,7 +20,7 @@ environ.Env.read_env()
 SECRET_KEY = env('SECRET_KEY')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
@@ -40,6 +40,15 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'django_celery_results',
 
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.vk',
+    'allauth.socialaccount.providers.instagram',
+
+    'taggit',
     'phonenumber_field',
     'treebeard',
 
@@ -66,8 +75,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, '../../templates'),
-            os.path.join(BASE_DIR, 'templates')
+            os.path.join(BASE_DIR, 'templates'),
         ]
         ,
         'APP_DIRS': True,
@@ -111,22 +119,8 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
-INSTALLED_APPS += [
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.facebook',
-    'allauth.socialaccount.providers.vk',
-    'allauth.socialaccount.providers.instagram',
-]
-
 # DJANGO TAGGIT
 TAGGIT_CASE_INSENSITIVE = True
-
-INSTALLED_APPS += [
-    'taggit'
-]
 
 # CELERY
 CELERY_BROKER_URL = env('CELERY_BROKER_URL')
@@ -144,7 +138,7 @@ CELERY_RESULT_SERIALIZER = 'json'
 
 ACCOUNT_FORMS = {
     'login': 'allauth.account.forms.LoginForm',
-    'signup': 'users.forms.ModifiedSignupForm',
+    'signup': 'allauth.account.forms.SignupForm',
     'add_email': 'allauth.account.forms.AddEmailForm',
     'change_password': 'allauth.account.forms.ChangePasswordForm',
     'set_password': 'allauth.account.forms.SetPasswordForm',
