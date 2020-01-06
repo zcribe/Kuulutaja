@@ -109,3 +109,5 @@ django-phonenumber-field==4.0.0
 django-treebeard==4.3
 phonenumbers==8.11.1
 psycopg2==2.8.4
+django-crispy-forms==1.8.1
+django-messages==0.6.0

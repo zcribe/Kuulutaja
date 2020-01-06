@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'taggit',
     'phonenumber_field',
     'treebeard',
+    'crispy_forms',
 
     'core',
     'users',
@@ -146,3 +147,5 @@ ACCOUNT_FORMS = {
     'reset_password_from_key': 'allauth.account.forms.ResetPasswordKeyForm',
     'disconnect': 'allauth.socialaccount.forms.DisconnectForm',
 }
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
