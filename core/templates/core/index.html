@@ -2,6 +2,20 @@
 {% load static %}
 
 {% block content %}
+
+    <div class="jumbotron mt-5">
+        <h1 class="display-3">Kuulutaja classified ads website</h1>
+        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention
+            to featured content or information.</p>
+        <hr class="my-4">
+        <p>It uses utility classes for typography and spacing to space content out within the larger
+            container.</p>
+        <p class="lead">
+            <a href="#!" class="btn btn-shadow text-mono btn-sm btn-primary">Add a new ad</a>
+        </p>
+    </div>
+
+
     {#        {% for item, info in annotated_list %}#}
     {#            {{ item }}#}
     {#        {% endfor %}#}
@@ -48,9 +62,10 @@
     {#        {% endif %}#}
     {#        {% endfor %}#}
     {#        </div>#}
-
-    <div class="card mt-3 mb-3">
-        <div class="card-body" style="display: flex; flex-direction: row; align-content: space-between; flex-wrap: wrap;justify-content: space-between;">
+    <h2 class="mt-5">Categories</h2>
+    <div class="card mb-5">
+        <div class="card-body"
+             style="display: flex; flex-direction: row; align-content: space-between; flex-wrap: wrap;justify-content: space-between;">
             {% for item, info in annotated_list %}
                 {% if info.level == 0 %}
                     <div class="list-group">
@@ -86,7 +101,6 @@
             {% endif %}
             {% endfor %}
             </div></div>
-
 
 
 

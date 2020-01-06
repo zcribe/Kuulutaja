@@ -4,8 +4,9 @@
 {% block content %}
     <nav aria-label="breadcrumb" class="mt-3 mb-3">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Library</li>
+
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ advertisement.category }}</li>
         </ol>
     </nav>
 
@@ -54,11 +55,12 @@
         </div>
         <div class="card-body">
             <h5 class="card-title">{{ advertisement.name }}</h5>
-            <p class="card-text text-white-50">{{ advertisement.content }}</p>
+            <small class="text-white-50">Posted by: {{ advertisement.owner }} at  {{ advertisement.created }}</small>
+            <p class="card-text text-white">{{ advertisement.content }}</p>
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item justify-content-between d-flex">
-                <span >
+                <span class="text-primary font-weight-bold">
                     <i class="fas fa-euro-sign"></i> {{ advertisement.price }}
                 </span>
 
@@ -68,8 +70,6 @@
             </li>
             <li class="list-group-item text-white-50"><i
                     class="fas fa-location-arrow"></i> {{ advertisement.location_city }}</li>
-            <li class="list-group-item text-white-50"><i class="fas fa-calendar-plus"></i> {{ advertisement.created }}
-            </li>
         </ul>
         <div class="card-body">
             <a href="#" class="btn btn-primary"><i class="fas fa-phone"></i> {{ advertisement.contact_phone }}</a>
