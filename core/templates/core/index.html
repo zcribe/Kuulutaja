@@ -12,7 +12,7 @@
     <div style="display: flex; flex-direction: row; align-content: space-between; flex-wrap: wrap;justify-content: space-between; margin: 5rem 0">
         {% for item, info in annotated_list %}
             {% if info.level == 0 %}
-                <div class="card" style="width: 18rem;">
+                <div class="card bg-primary text-white" style="width: 18rem;">
                 <div class="card-body">
                 <ul class="list-unstyled">
             {% endif %}
@@ -20,17 +20,17 @@
             <h5 class="card-title">{{ item }}</h5>
         {% elif info.level == 2 %}
             <a href="/category/{{ item.slug }}">
-                <li>{{ item }}</li>
+                <li class="text-white">{{ item }}</li>
             </a>
         {% elif info.level == 2 and info.open %}
             <ul>
                 <a href="">
-                    <li>{{ item }}</li>
+                    <li class="text-white">{{ item }}</li>
                 </a>
                 {% elif info.level == 2  and not info.open %}
 
                 <a href="">
-                    <li>{{ item }}</li>
+                    <li class="text-white">{{ item }}</li>
                 </a>
             </ul>
         {% endif %}
@@ -43,7 +43,7 @@
             </ul></ul></div></div>
         {% elif 0 in info.close %}
             </ul></div></div>
-            <div class="card" style="width: 18rem;">
+            <div class="card bg-primary text-white" style="width: 18rem;">
             <div class="card-body">
             <ul class="list-unstyled">
         {% endif %}
