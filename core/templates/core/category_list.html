@@ -4,20 +4,26 @@
 {% block content %}
 
 
-    <h2>Advertisements</h2>
+    <h2 class="mt-3 mb-3">Advertisements</h2>
     <div class="card-columns">
         {% for ad in object_list %}
 
             <div class="card">
                 <a href="/advertisement/{{ ad.slug }}">
-                    <img src="{% static ad.advertisement.first.image.url %}" alt="">
+                    {#                    <img src="{% static ad.advertisement.first.image.url %}" alt="">#}
+
+                    <img src="https://source.unsplash.com/random" alt="" class="img-fluid">
+
+
+                    <div class="card-header">
+                        <h5 class="text-white h5">{{ ad.name }} </h5>
+                    </div>
                     <div class="card-body">
-                        <h5 class="card-title lead">{{ ad.name }}  </h5>
                         {% if ad.price != "." %}
-                            <small>{{ ad.price }}€</small>
+                            <span class="text-primary  font-weight-bold"><i class="fas fa-euro-sign"></i> {{ ad.price }}</span>
                         {% endif %}
 
-                        <p class="card-text">
+                        <p class="card-text text-white-50">
                             {{ ad.content|truncatewords:10 }}
                         </p>
                     </div>
