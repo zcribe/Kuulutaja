@@ -30,11 +30,11 @@
                 </div>
 
                 <ul class="list-group mt-4">
-                    <li class="list-group-item"><a href="{% url 'profile' %}" ><i class="fas fa-ad text-white-50 mr-2"></i>My advertisements</a></li>
-                    <li class="list-group-item"><a href="{% url 'profile-email' %}" ><i class="fas fa-envelope text-white-50 mr-2"></i>Email</a></li>
-                    <li class="list-group-item"><a href="{% url 'profile-password' %}" ><i class="fas fa-key text-white-50 mr-2"></i>Password</a></li>
-                    <li class="list-group-item"><a href="{% url 'profile-settings' %}" ><i class="fas fa-cogs text-white-50 mr-2"></i>Settings</a></li>
-                    <li class="list-group-item"><a href="{% url 'profile-privacy' %}" ><i class="fas fa-user-secret text-white-50 mr-2"></i>Privacy</a></li>
+                    <li class="list-group-item"><a href="{% url 'profile' %}" ><i class="fas fa-ad text-primary mr-2"></i>My advertisements</a></li>
+                    <li class="list-group-item"><a href="{% url 'profile-email' %}" ><i class="fas fa-envelope text-primary mr-2"></i>Email</a></li>
+                    <li class="list-group-item"><a href="{% url 'profile-password' %}" ><i class="fas fa-key text-primary mr-2"></i>Password</a></li>
+                    <li class="list-group-item"><a href="{% url 'profile-settings' %}" ><i class="fas fa-cogs text-primary mr-2"></i>Settings</a></li>
+                    <li class="list-group-item"><a href="{% url 'profile-privacy' %}" ><i class="fas fa-user-secret text-primary mr-2"></i>Privacy</a></li>
                 </ul>
 
             </div>
@@ -61,7 +61,7 @@
                 <div class="card mt-4">
                     <div class="card-header d-flex justify-content-between align">
                        <h5>My advertisements</h5>
-                        <a href="#" class="btn btn-primary"><i class="fas fa-plus text-white-50 mr-3"></i>Add new</a>
+                        <a href="{% url 'ad-create' %}" class="btn btn-primary"><i class="fas fa-plus text-white-50 mr-3"></i>Add new</a>
                     </div>
                     <table class="table table-hover table-striped">
                         <thead class="thead-dark">
