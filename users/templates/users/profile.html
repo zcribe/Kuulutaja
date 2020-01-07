@@ -25,14 +25,16 @@
                         <h4 class="card-title">{{ user }}</h4>
                         <small>{{ profile }}</small>
                         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="" class="btn btn-secondary btn-sm"><i class="fas fa-edit"></i> Edit biogoraphy</a>
                     </div>
                 </div>
 
                 <ul class="list-group mt-4">
-                    <li class="list-group-item"><i class="fas fa-envelope text-white-50 mr-3"></i> Email</li>
-                    <li class="list-group-item"><i class="fas fa-key text-white-50 mr-3"></i> Password</li>
-                    <li class="list-group-item"><i class="fas fa-cogs text-white-50 mr-3"></i> Settings</li>
-                    <li class="list-group-item"><i class="fas fa-user-secret text-white-50 mr-3"></i> Privacy</li>
+                    <li class="list-group-item"><a href="{% url 'profile' %}" ><i class="fas fa-ad text-white-50 mr-2"></i>My advertisements</a></li>
+                    <li class="list-group-item"><a href="{% url 'profile-email' %}" ><i class="fas fa-envelope text-white-50 mr-2"></i>Email</a></li>
+                    <li class="list-group-item"><a href="{% url 'profile-password' %}" ><i class="fas fa-key text-white-50 mr-2"></i>Password</a></li>
+                    <li class="list-group-item"><a href="{% url 'profile-settings' %}" ><i class="fas fa-cogs text-white-50 mr-2"></i>Settings</a></li>
+                    <li class="list-group-item"><a href="{% url 'profile-privacy' %}" ><i class="fas fa-user-secret text-white-50 mr-2"></i>Privacy</a></li>
                 </ul>
 
             </div>
