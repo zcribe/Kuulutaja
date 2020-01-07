@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import DetailView, TemplateView
+from django.views.generic import DetailView, TemplateView, UpdateView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
@@ -16,6 +16,12 @@ class ProfileView(TemplateView):
         context['profile'] = Profile.objects.filter(user__username=self.request.user.get_username())
         context['my_adverts'] = Advertisement.objects.filter(owner=self.request.user.pk)
         return context
+
+@method_decorator(login_required, name='dispatch')
+class ProfileUpdateView(UpdateView):
+    template_name = 'users/profile_update.html'
+    model = Profile
+
 
 
 @method_decorator(login_required, name='dispatch')

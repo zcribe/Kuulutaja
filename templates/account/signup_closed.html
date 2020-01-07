@@ -6,7 +6,15 @@
 {% block head_title %}{% trans "Sign Up Closed" %}{% endblock %}
 
 {% block content %}
-<h1>{% trans "Sign Up Closed" %}</h1>
+    <div class="card mt-5">
+        <div class="card-header">
+            <h1>{% trans "Sign Up Closed" %}</h1>
+        </div>
+        <div class="card-body">
+            <p>{% trans "We are sorry, but the sign up is currently closed." %}</p>
+        </div>
+    </div>
 
-<p>{% trans "We are sorry, but the sign up is currently closed." %}</p>
+
+
 {% endblock %}
