@@ -14,3 +14,5 @@ class ProfileView(TemplateView):
         context = super(ProfileView, self).get_context_data(**kwargs)
         context['profile'] = Profile.objects.filter(user__username=self.request.user.get_username())
         return context
+
+

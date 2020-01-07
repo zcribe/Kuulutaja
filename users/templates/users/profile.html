@@ -29,32 +29,93 @@
                 </div>
 
                 <ul class="list-group mt-4">
-                    <li class="list-group-item"><i class="fas fa-plus text-white-50 mr-3"></i>  Add a new advertisement</li>
-                    <li class="list-group-item justify-content-between">
-                        <i class="fas fa-ad text-white-50 mr-3"></i>
-                        My advertisements
-                        <span class="badge badge-default badge-pill">14</span>
-                    </li>
-                    <li class="list-group-item"><i class="fas fa-envelope text-white-50 mr-3"></i>  Email</li>
-                    <li class="list-group-item"><i class="fas fa-key text-white-50 mr-3"></i>  Password</li>
-                    <li class="list-group-item"><i class="fas fa-cogs text-white-50 mr-3"></i>  Settings</li>
-                    <li class="list-group-item"><i class="fas fa-user-secret text-white-50 mr-3"></i>  Privacy</li>
+                    <li class="list-group-item"><i class="fas fa-envelope text-white-50 mr-3"></i> Email</li>
+                    <li class="list-group-item"><i class="fas fa-key text-white-50 mr-3"></i> Password</li>
+                    <li class="list-group-item"><i class="fas fa-cogs text-white-50 mr-3"></i> Settings</li>
+                    <li class="list-group-item"><i class="fas fa-user-secret text-white-50 mr-3"></i> Privacy</li>
                 </ul>
 
             </div>
             <div class="col-8">
                 <div class="card text-center">
                     <div class="card-header">
-                        Featured
+                        <ul class="nav nav-tabs card-header-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">Active</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Link</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                            </li>
+                        </ul>
                     </div>
                     <div class="card-body">
-                        <h4 class="card-title">Special title treatment</h4>
+                        <h5 class="card-title">Special title treatment</h5>
                         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#!" class="btn btn-primary">Go somewhere</a>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
                     </div>
-                    <div class="card-footer text-muted">
-                        2 days ago
+                </div>
+                <div class="card mt-4">
+                    <div class="card-header d-flex justify-content-between align">
+                       <h5>My advertisements</h5>
+                        <a href="#" class="btn btn-primary"><i class="fas fa-plus text-white-50 mr-3"></i>Add new</a>
                     </div>
+                    <table class="table table-hover table-striped">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>Views</th>
+                            <th>Created</th>
+                            <th>Control</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>Otto</td>
+
+                            <td>
+                                <a href="" class="btn btn-info btn-sm"><i class="fas fa-binoculars"></i> View</a>
+                                <a href="" class="btn btn-secondary btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                                <a href="" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>Thornton</td>
+
+
+                            <td>
+                                <a href="" class="btn btn-info btn-sm"><i class="fas fa-binoculars"></i> View</a>
+                                <a href="" class="btn btn-secondary btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                                <a href="" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Contextual</td>
+                            <td>Row</td>
+                            <td>Row</td>
+
+
+                            <td>
+                                <a href="" class="btn btn-info btn-sm"><i class="fas fa-binoculars"></i> View</a>
+                                <a href="" class="btn btn-secondary btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                                <a href="" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+
                 </div>
 
 
