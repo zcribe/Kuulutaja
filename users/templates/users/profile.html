@@ -1,7 +1,67 @@
 {% extends 'base2.html' %}
 {% load static %}
 
+{% block head_title %}
+    Profile: {{ user }}
+{% endblock head_title %}
+
 {% block content %}
-{{ profile }}
+    <div class="container mt-5">
+        <div class="row">
+
+            <div class="col-4">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <div class="mx-auto" style="width: 150px;
+        height: 150px;
+        border: 1px solid #11111d;
+        border-radius: 100px;
+        background-image: url('https://images.unsplash.com/photo-1542080681-b52d382432af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1534&q=80');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position:center; "></div>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">{{ user }}</h4>
+                        <small>{{ profile }}</small>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    </div>
+                </div>
+
+                <ul class="list-group mt-4">
+                    <li class="list-group-item"><i class="fas fa-plus text-white-50 mr-3"></i>  Add a new advertisement</li>
+                    <li class="list-group-item justify-content-between">
+                        <i class="fas fa-ad text-white-50 mr-3"></i>
+                        My advertisements
+                        <span class="badge badge-default badge-pill">14</span>
+                    </li>
+                    <li class="list-group-item"><i class="fas fa-envelope text-white-50 mr-3"></i>  Email</li>
+                    <li class="list-group-item"><i class="fas fa-key text-white-50 mr-3"></i>  Password</li>
+                    <li class="list-group-item"><i class="fas fa-cogs text-white-50 mr-3"></i>  Settings</li>
+                    <li class="list-group-item"><i class="fas fa-user-secret text-white-50 mr-3"></i>  Privacy</li>
+                </ul>
+
+            </div>
+            <div class="col-8">
+                <div class="card text-center">
+                    <div class="card-header">
+                        Featured
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Special title treatment</h4>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#!" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                    <div class="card-footer text-muted">
+                        2 days ago
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+
 {% endblock content %}
 

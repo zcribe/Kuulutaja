@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-{#    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"#}
-{#          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">#}
+    {#    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"#}
+    {#          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">#}
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap4-neon-glow.min.css' %}">
     <script src="https://kit.fontawesome.com/a6d2cc538f.js" crossorigin="anonymous"></script>
     <meta name="viewport"
@@ -23,27 +23,31 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-{#        <ul class="navbar-nav mr-auto">#}
-{#            <li class="nav-item active">#}
-{#                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>#}
-{#            </li>#}
-{#            <li class="nav-item">#}
-{#                <a class="nav-link" href="#">Link</a>#}
-{#            </li>#}
-{#        </ul>#}
+        {#        <ul class="navbar-nav mr-auto">#}
+        {#            <li class="nav-item active">#}
+        {#                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>#}
+        {#            </li>#}
+        {#            <li class="nav-item">#}
+        {#                <a class="nav-link" href="#">Link</a>#}
+        {#            </li>#}
+        {#        </ul>#}
         <form class="form-inline m-auto" action="/search" method="get">
             <input class="form-control mr-sm-2" name="q" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
         </form>
         <ul class="navbar-nav">
             {% if user.is_authenticated %}
-                <li class="nav-item"><a href="{% url 'profile' user.id %}" class="nav-link text-white-50"><i class="fas fa-user"></i> {% user_display user %}</a>
+                <li class="nav-item"><a href="{% url 'profile' %}" class="nav-link text-white-50"><i class="fas fa-user"></i> {% user_display user %}</a>
                 </li>
-                <li class="nav-item"><a href="{% url 'account_email' %}" class="nav-link text-white-50"><i class="fas fa-envelope"></i> Change E-mail</a></li>
-                <li class="nav-item"><a href="{% url 'account_logout' %}" class="nav-link text-white-50"><i class="fas fa-sign-out-alt"></i> Sign Out</a></li>
+                <li class="nav-item"><a href="{% url 'account_email' %}" class="nav-link text-white-50"><i
+                        class="fas fa-envelope"></i> Change E-mail</a></li>
+                <li class="nav-item"><a href="{% url 'account_logout' %}" class="nav-link text-white-50"><i
+                        class="fas fa-sign-out-alt"></i> Sign Out</a></li>
             {% else %}
-                <li class="nav-item"><a href="{% url 'account_login' %}" class="nav-link text-white-50"><i class="fas fa-sign-in-alt"></i> Login</a></li>
-                <li class="nav-item"><a href="{% url 'account_signup' %}" class="nav-link text-white-50"><i class="fas fa-user-plus"></i> Sign Up</a></li>
+                <li class="nav-item"><a href="{% url 'account_login' %}" class="nav-link text-white-50"><i
+                        class="fas fa-sign-in-alt"></i> Login</a></li>
+                <li class="nav-item"><a href="{% url 'account_signup' %}" class="nav-link text-secondary"><i
+                        class="fas fa-user-plus"></i> Sign Up</a></li>
             {% endif %}
         </ul>
     </div>
@@ -51,9 +55,8 @@
 
 
 <div class="container">
-    {% if messages %}#}
-        <div>
-            <strong>Messages:</strong>
+    {% if messages %}
+        <div class="mt-5">
             <ul>
                 {% for message in messages %}
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
