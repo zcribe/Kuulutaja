@@ -37,7 +37,8 @@
         </form>
         <ul class="navbar-nav">
             {% if user.is_authenticated %}
-                <li class="nav-item"><a href="{% url 'profile' %}" class="nav-link text-white-50"><i class="fas fa-user"></i> {% user_display user %}</a>
+                <li class="nav-item"><a href="{% url 'profile' %}" class="nav-link text-white-50"><i
+                        class="fas fa-user"></i> {% user_display user %}</a>
                 </li>
                 <li class="nav-item"><a href="{% url 'account_logout' %}" class="nav-link text-white-50"><i
                         class="fas fa-sign-out-alt"></i> Sign Out</a></li>
@@ -55,16 +56,28 @@
 <div class="container">
     {% if messages %}
         <div class="mt-5">
-            <ul>
-                {% for message in messages %}
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        {{ message }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+            {#            <ul>#}
+            {#                {% for message in messages %}#}
+            {#                    <div class="alert alert-warning alert-dismissible fade show" role="alert">#}
+            {#                        {{ message }}#}
+            {#                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">#}
+            {#                            <span aria-hidden="true">&times;</span>#}
+            {#                        </button>#}
+            {#                    </div>#}
+            {#                {% endfor %}#}
+            {#            </ul>#}
+            {% if messages %}
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        {% for message in messages %}
+                            <div class="alert {{ message.tags }}" role="alert">
+                                <p class="mt-auto mb-auto">{{ message }}</p>
+                            </div>
+                        {% endfor %}
                     </div>
-                {% endfor %}
-            </ul>
+
+                </div>
+            {% endif %}
         </div>
     {% endif %}
     {% block content %}
