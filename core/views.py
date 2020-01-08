@@ -67,6 +67,8 @@ class AdvertCreateView(CreateView):
     """ Create Ad"""
     model = Advertisement
     template_name = 'core/advert_create.html'
+    fields = ['contact_email', 'contact_phone', 'category', 'content', 'price', 'location_city']
+    success_url = '/'
 
 
 @method_decorator(login_required, name='dispatch')
@@ -74,6 +76,7 @@ class AdvertDeleteView(DeleteView):
     """ Delete Ad """
     model = Advertisement
     template_name = 'core/advert_delete.html'
+
 
 
 @method_decorator(login_required, name='dispatch')
