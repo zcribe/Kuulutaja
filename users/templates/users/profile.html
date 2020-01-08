@@ -27,12 +27,12 @@
                             {% if profile.bio %}
                                 <small>{{ profile.bio }}</small>
                             {% else %}
-                                <small>Few lines describing you.{{ profile }}</small>
+                                <small>Few lines describing you.</small>
                             {% endif %}
                         </div>
 
                         <a href="{% url 'profile-update' %}" class="btn btn-outline-info btn-sm"><i
-                                class="fas fa-edit"></i> Edit biogoraphy</a>
+                                class="fas fa-edit"></i> Edit biography</a>
                     </div>
                 </div>
 
@@ -51,22 +51,26 @@
 
             </div>
             <div class="col-8">
+            {% block profile_content %}
                 <div class="card text-center">
                     <div class="card-header">
                         <ul class="nav nav-tabs card-header-tabs">
                             <li class="nav-item">
-                                <a class="nav-link active" href="#">Views</a>
+                                <a class="nav-link {% block day %}{% endblock %}" href="#">Today</a>
+                            </li>
+                             <li class="nav-item">
+                                <a class="nav-link {% block week %}{% endblock %}" href="#">Week</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Sales</a>
+                                <a class="nav-link {% block month %}{% endblock %}" href="#">Month</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                                <a class="nav-link {% block year %}{% endblock %}" href="#" tabindex="-1" aria-disabled="true">Year</a>
                             </li>
                         </ul>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">This month</h5>
+{#                        <h5 class="card-title">This month</h5>#}
                         <canvas id="myChart" width="400" height="200"></canvas>
                     </div>
                 </div>
@@ -143,8 +147,7 @@
                     </table>
 
                 </div>
-
-
+            {% endblock profile_content %}
             </div>
 
         </div>
@@ -163,22 +166,8 @@
                 datasets: [{
                     label: '# of Votes',
                     data: [12, 19, 3, 5, 2, 3],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)',
-                        'rgba(255, 159, 64, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
-                    ],
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
                     borderWidth: 1
                 }]
             },

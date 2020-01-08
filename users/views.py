@@ -13,8 +13,7 @@ class ProfileView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(ProfileView, self).get_context_data(**kwargs)
-        # context['profile'] = Profile.objects.filter(user=self.request.user.pk)
-        context['profile'] = Profile.objects.all().count()
+        context['profile'] = Profile.objects.filter(user=self.request.user.pk).get()
         context['my_adverts'] = Advertisement.objects.filter(owner=self.request.user.pk)
         return context
 

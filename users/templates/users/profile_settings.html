@@ -1,84 +1,40 @@
-{% extends 'base2.html' %}
+{% extends 'users/profile.html' %}
 {% load static %}
 
 {% block head_title %}
     Profile: {{ user }}
 {% endblock head_title %}
 
-{% block content %}
-    <div class="container mt-5">
-        <div class="row">
-
-            <div class="col-4">
-                <div class="card text-center">
-                    <div class="card-header">
-                        <div class="mx-auto" style="width: 150px;
-        height: 150px;
-        border: 1px solid #11111d;
-        border-radius: 100px;
-        background-image: url('https://images.unsplash.com/photo-1542080681-b52d382432af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1534&q=80');
-        background-size: 100%;
-        background-repeat: no-repeat;
-        background-position:center; "></div>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="card-title">{{ user }}</h4>
-                        <small>{{ profile }}</small>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="" class="btn btn-secondary btn-sm"><i class="fas fa-edit"></i> Edit biogoraphy</a>
-                    </div>
-                </div>
-
-                <ul class="list-group mt-4">
-                    <li class="list-group-item"><a href="{% url 'profile' %}"><i
-                            class="fas fa-ad text-white-50 mr-2"></i>My advertisements</a></li>
-                    <li class="list-group-item"><a href="{% url 'profile-email' %}"><i
-                            class="fas fa-envelope text-white-50 mr-2"></i>Email</a></li>
-                    <li class="list-group-item"><a href="{% url 'profile-password' %}"><i
-                            class="fas fa-key text-white-50 mr-2"></i>Password</a></li>
-                    <li class="list-group-item"><a href="{% url 'profile-settings' %}"><i
-                            class="fas fa-cogs text-white-50 mr-2"></i>Settings</a></li>
-                    <li class="list-group-item"><a href="{% url 'profile-privacy' %}"><i
-                            class="fas fa-user-secret text-white-50 mr-2"></i>Privacy</a></li>
-                </ul>
-
-            </div>
-            <div class="col-8">
-                <div class="card text-center">
-                    <div class="card-header">
-                        <ul class="nav nav-tabs card-header-tabs">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#">Active</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Link</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-                <div class="card mt-4">
-                    <div class="card-header d-flex justify-content-between align">
-                        <h5>Settings</h5>
-                    </div>
-                    <div class="card-body">
-
-                    </div>
-
-                </div>
-
-
-            </div>
-
+{% block profile_content %}
+    <div class="card text-center">
+        <div class="card-header">
+            <ul class="nav nav-tabs card-header-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Active</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Special title treatment</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
         </div>
     </div>
+    <div class="card mt-4">
+        <div class="card-header d-flex justify-content-between align">
+            <h5>Settings</h5>
+        </div>
+        <div class="card-body">
 
-{% endblock content %}
+        </div>
+
+    </div>
+
+{% endblock profile_content %}
 
