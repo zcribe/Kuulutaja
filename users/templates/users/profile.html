@@ -15,15 +15,15 @@
 
                         {% if profile.image %}
                             <div class="mx-auto" style="width: 150px;
-        height: 150px;
-        border: 1px solid #11111d;
-        border-radius: 100px;
-        background-image: url('{{ profile.image.url }}');
-        background-size: 100%;
-        background-repeat: no-repeat;
-        background-position:center; "></div>
+                                    height: 150px;
+                                    border: 1px solid #11111d;
+                                    border-radius: 100px;
+                                    background-image: url('{{ profile.image.url }}');
+                                    background-size: 100%;
+                                    background-repeat: no-repeat;
+                                    background-position:center; "></div>
                         {% else %}
-                        <div class="mx-auto" style="width: 150px;
+                            <div class="mx-auto" style="width: 150px;
         height: 150px;
         border: 1px solid #11111d;
         border-radius: 100px;
@@ -63,103 +63,72 @@
 
             </div>
             <div class="col-9">
-            {% block profile_content %}
-                <div class="card text-center">
-                    <div class="card-header">
-                        <ul class="nav nav-tabs card-header-tabs">
-                            <li class="nav-item">
-                                <a class="nav-link" id="today">Today</a>
-                            </li>
-                             <li class="nav-item">
-                                <a class="nav-link" id="week">Week</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="month">Month</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="year" tabindex="-1" aria-disabled="true">Year</a>
-                            </li>
-                        </ul>
+                {% block profile_content %}
+                    <div class="card text-center">
+                        <div class="card-header">
+                            <ul class="nav nav-tabs card-header-tabs">
+                                <li class="nav-item">
+                                    <a class="nav-link" id="today">Today</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="week">Week</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="month">Month</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="year" tabindex="-1" aria-disabled="true">Year</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-body">
+                            {#                        <h5 class="card-title">This month</h5>#}
+                            <canvas id="myChart" width="400" height="200"></canvas>
+                        </div>
                     </div>
-                    <div class="card-body">
-{#                        <h5 class="card-title">This month</h5>#}
-                        <canvas id="myChart" width="400" height="200"></canvas>
+                    <div class="card mt-4">
+                        <div class="card-header d-flex justify-content-between align">
+                            <h5 class="h5 mt-auto mb-auto">My advertisements</h5>
+                            <a href="{% url 'ad-create' %}" class="btn btn-primary"><i
+                                    class="fas fa-plus text-white-50 mr-3"></i>Add new</a>
+                        </div>
+                        <table class="table table-hover table-striped">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th>#</th>
+                                <th>Title</th>
+                                <th>Views</th>
+                                <th>Created</th>
+                                <th>Control</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for advert in my_adverts %}
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td class="text-white-50">{{ advert.name }}</td>
+                                    <td class="text-white-50">{{ advert.views }}</td>
+                                    <td class="text-white-50">{{ advert.created }}</td>
+
+                                    <td>
+                                        <div class="btn-group">
+                                            <a href="{% url 'ad-detail' advert.pk %}" class="btn btn-outline-info btn-sm"><i
+                                                    class="fas fa-binoculars"></i>
+                                                View</a>
+                                            <a href="{% url 'ad-update' advert.pk %}" class="btn btn-outline-secondary btn-sm"><i
+                                                    class="fas fa-edit"></i> Edit</a>
+                                            <a href="{% url 'ad-delete' advert.pk %}" class="btn btn-outline-danger btn-sm"><i
+                                                    class="fas fa-trash"></i> Delete</a>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
                     </div>
-                </div>
-                <div class="card mt-4">
-                    <div class="card-header d-flex justify-content-between align">
-                        <h5 class="h5 mt-auto mb-auto">My advertisements</h5>
-                        <a href="{% url 'ad-create' %}" class="btn btn-primary"><i
-                                class="fas fa-plus text-white-50 mr-3"></i>Add new</a>
-                    </div>
-                    <table class="table table-hover table-striped">
-                        <thead class="thead-dark">
-                        <tr>
-                            <th>#</th>
-                            <th>Title</th>
-                            <th>Views</th>
-                            <th>Created</th>
-                            <th>Control</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td class="text-white-50">Mark</td>
-                            <td class="text-white-50">Otto</td>
-                            <td class="text-white-50">Otto</td>
-
-                            <td>
-                                <div class="btn-group">
-                                    <a href="" class="btn btn-outline-info btn-sm"><i class="fas fa-binoculars"></i>
-                                        View</a>
-                                    <a href="" class="btn btn-outline-secondary btn-sm"><i class="fas fa-edit"></i> Edit</a>
-                                    <a href="" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
-                                </div>
-
-                            </td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td class="text-white-50">Jacob</td>
-                            <td class="text-white-50">Thornton</td>
-                            <td class="text-white-50">Thornton</td>
-
-
-                            <td>
-                                <div class="btn-group">
-                                    <a href="" class="btn btn-outline-info btn-sm"><i class="fas fa-binoculars"></i>
-                                        View</a>
-                                    <a href="" class="btn btn-outline-secondary btn-sm"><i class="fas fa-edit"></i> Edit</a>
-                                    <a href="" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
-                                </div>
-
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <th scope="row">3</th>
-                            <td class="text-white-50">Contextual</td>
-                            <td class="text-white-50">Row</td>
-                            <td class="text-white-50">Row</td>
-
-
-                            <td>
-                                <div class="btn-group">
-                                    <a href="" class="btn btn-outline-info btn-sm"><i class="fas fa-binoculars"></i>
-                                        View</a>
-                                    <a href="" class="btn btn-outline-secondary btn-sm"><i class="fas fa-edit"></i> Edit</a>
-                                    <a href="" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
-                                </div>
-
-                            </td>
-                        </tr>
-
-                        </tbody>
-                    </table>
-
-                </div>
-            {% endblock profile_content %}
+                {% endblock profile_content %}
             </div>
 
         </div>
