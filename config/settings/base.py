@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     'crispy_forms',
 
     'core',
-    'users',
+    'users.apps.UsersConfig',
     'flatpages'
 ]
 

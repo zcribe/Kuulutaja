@@ -13,7 +13,8 @@ class ProfileView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(ProfileView, self).get_context_data(**kwargs)
-        context['profile'] = Profile.objects.filter(user=self.request.user.pk)
+        # context['profile'] = Profile.objects.filter(user=self.request.user.pk)
+        context['profile'] = Profile.objects.all().count()
         context['my_adverts'] = Advertisement.objects.filter(owner=self.request.user.pk)
         return context
 
@@ -26,7 +27,7 @@ class ProfileUpdateView(UpdateView):
     success_url = '/accounts/profile'
 
     def get_object(self, queryset=None):
-        obj = Profile.objects.filter(user=self.request.user)
+        obj = Profile.objects.filter(user=self.request.user.pk)
         return obj.get()
 
 
