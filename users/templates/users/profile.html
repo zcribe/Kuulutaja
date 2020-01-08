@@ -9,25 +9,37 @@
     <div class="container mt-5">
         <div class="row">
 
-            <div class="col-4">
+            <div class="col-3">
                 <div class="card text-center">
                     <div class="card-header">
+
+                        {% if profile.image %}
+                            <div class="mx-auto" style="width: 150px;
+        height: 150px;
+        border: 1px solid #11111d;
+        border-radius: 100px;
+        background-image: url('{{ profile.image.url }}');
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position:center; "></div>
+                        {% else %}
                         <div class="mx-auto" style="width: 150px;
         height: 150px;
         border: 1px solid #11111d;
         border-radius: 100px;
-        background-image: url('https://images.unsplash.com/photo-1542080681-b52d382432af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1534&q=80');
+        background-image: url('https://via.placeholder.com/150');
         background-size: 100%;
         background-repeat: no-repeat;
         background-position:center; "></div>
+                        {% endif %}
                     </div>
                     <div class="card-body">
-                        <h4 class="card-title">{{ user }} </h4>
+                        <h5 class="card-title">{{ user }} </h5>
                         <div class="m-2">
                             {% if profile.bio %}
-                                <small>{{ profile.bio }}</small>
+                                <small class="text-white-50">{{ profile.bio }}</small>
                             {% else %}
-                                <small>Few lines describing you.</small>
+                                <small class="text-white-50">Few lines describing you.</small>
                             {% endif %}
                         </div>
 
@@ -50,22 +62,22 @@
                 </ul>
 
             </div>
-            <div class="col-8">
+            <div class="col-9">
             {% block profile_content %}
                 <div class="card text-center">
                     <div class="card-header">
                         <ul class="nav nav-tabs card-header-tabs">
                             <li class="nav-item">
-                                <a class="nav-link {% block day %}{% endblock %}" href="#">Today</a>
+                                <a class="nav-link" id="today">Today</a>
                             </li>
                              <li class="nav-item">
-                                <a class="nav-link {% block week %}{% endblock %}" href="#">Week</a>
+                                <a class="nav-link" id="week">Week</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {% block month %}{% endblock %}" href="#">Month</a>
+                                <a class="nav-link" id="month">Month</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link {% block year %}{% endblock %}" href="#" tabindex="-1" aria-disabled="true">Year</a>
+                                <a class="nav-link" id="year" tabindex="-1" aria-disabled="true">Year</a>
                             </li>
                         </ul>
                     </div>
@@ -93,9 +105,9 @@
                         <tbody>
                         <tr>
                             <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>Otto</td>
+                            <td class="text-white-50">Mark</td>
+                            <td class="text-white-50">Otto</td>
+                            <td class="text-white-50">Otto</td>
 
                             <td>
                                 <div class="btn-group">
@@ -109,9 +121,9 @@
                         </tr>
                         <tr>
                             <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>Thornton</td>
+                            <td class="text-white-50">Jacob</td>
+                            <td class="text-white-50">Thornton</td>
+                            <td class="text-white-50">Thornton</td>
 
 
                             <td>
@@ -127,9 +139,9 @@
 
                         <tr>
                             <th scope="row">3</th>
-                            <td>Contextual</td>
-                            <td>Row</td>
-                            <td>Row</td>
+                            <td class="text-white-50">Contextual</td>
+                            <td class="text-white-50">Row</td>
+                            <td class="text-white-50">Row</td>
 
 
                             <td>
@@ -181,6 +193,11 @@
                 }
             }
         });
+    </script>
+    <script>
+        $("#day").click(function () {
+            $("#day").toggleClass("active")
+        })
     </script>
 {% endblock scripts %}
 

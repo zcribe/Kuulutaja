@@ -22,7 +22,7 @@ class ProfileView(TemplateView):
 class ProfileUpdateView(UpdateView):
     template_name = 'users/profile_update.html'
     model = Profile
-    fields = ['bio']
+    fields = ['image', 'bio', 'company', 'website', 'locations']
     success_url = '/accounts/profile'
 
     def get_object(self, queryset=None):

@@ -1,53 +1,57 @@
 {% extends 'users/profile.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block head_title %}
     Profile: {{ user }}
 {% endblock head_title %}
 
 {% block profile_content %}
-                <div class="card text-center">
-                    <div class="card-header">
-                        <ul class="nav nav-tabs card-header-tabs">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="#">Active</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Link</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-                <div class="card mt-4">
-                    <div class="card-header d-flex justify-content-between align">
-                        <h5>Email settings</h5>
-                    </div>
+    {#                <div class="card text-center">#}
+    {#                    <div class="card-header">#}
+    {#                        <ul class="nav nav-tabs card-header-tabs">#}
+    {#                            <li class="nav-item">#}
+    {#                                <a class="nav-link active" href="#">Active</a>#}
+    {#                            </li>#}
+    {#                            <li class="nav-item">#}
+    {#                                <a class="nav-link" href="#">Link</a>#}
+    {#                            </li>#}
+    {#                            <li class="nav-item">#}
+    {#                                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>#}
+    {#                            </li>#}
+    {#                        </ul>#}
+    {#                    </div>#}
+    {#                    <div class="card-body">#}
+    {#                        <h5 class="card-title">Special title treatment</h5>#}
+    {#                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>#}
+    {#                        <a href="#" class="btn btn-primary">Go somewhere</a>#}
+    {#                    </div>#}
+    {#                </div>#}
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align">
+            <h5>Email settings</h5>
+        </div>
 
 
-                    <ul class="list-group">
-                        <li class="list-group-item">Your current e-mail address is {{ user.email }} <span class="badge badge-pill badge-success">Verified</span></li>
-                        <li class="list-group-item"><a href="{% url 'account_email' %}"><i
-                                class="fas fa-envelope"></i> Change E-mail</a></li>
+        <ul class="list-group">
+            <li class="list-group-item">Your current e-mail address is {{ user.email }} <span
+                    class="badge badge-pill badge-success ml-3">Verified</span></li>
+            <li class="list-group-item"><a href="{% url 'account_email' %}" class="btn btn-sm btn-secondary"> Manage
+                e-mail addresses</a></li>
+        </ul>
+    </div>
+    <div class="card mt-4">
+        <div class="card-header d-flex justify-content-between align">
+            <h5>Email preferences</h5>
+        </div>
 
+        <ul class="list-group">
+            <li class="list-group-item">Receive all emails, except those I unsubscribe from.</li>
+            <li class="list-group-item">Only receive account related emails, and those I subscribe to.</li>
+            <li class="list-group-item"><a href="#" class="btn btn-primary">Change</a></li>
 
-                        <li class="list-group-item justify-content-between">
-                            Re-send the verification email
-                            <span class="badge badge-default badge-pill">14</span>
-                        </li>
-                        <li class="list-group-item">Vestibulum at eros</li>
-                        <li class="list-group-item list-group-item-danger">Dapibus ac facilisis in</li>
-                    </ul>
-
-
-                </div>
+        </ul>
+    </div>
 {% endblock profile_content %}
 
 

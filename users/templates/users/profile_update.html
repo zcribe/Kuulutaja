@@ -7,19 +7,38 @@
 {% endblock head_title %}
 
 {% block content %}
-    <div class="card mt-5">
-        <div class="card-header">
-            <h1>Edit biography</h1>
+    <div class="row">
+
+        <div class="col-3">
+            <div class="card mt-5">
+                <div class="card-body">
+                    <div class="">
+                        <img src="{{ profile.image }}" alt="">
+                    </div>
+                    <p>{{ profile.bio }}</p>
+                    <p>{{ profile.company }}</p>
+                    <p>{{ profile.website }}</p>
+                    <p>{{ profile.locations }}</p>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-            <form method="post">{% csrf_token %}
-                {{ form|crispy }}
+        <div class="col-9">
 
-                <input type="submit" class="btn btn-primary" value="Update">
-{#                <a class="btn btn-danger" href="{% url 'profile' %}">Back</a>#}
+            <div class="card mt-5">
+                <div class="card-header">
+                    <h1>Edit biography</h1>
+                </div>
+                <div class="card-body">
+                    <form method="post">{% csrf_token %}
+                        {{ form|crispy }}
 
+                        <input type="submit" class="btn btn-primary" value="Update">
+                        {#                <a class="btn btn-danger" href="{% url 'profile' %}">Back</a>#}
+                        <a href="{% url 'profile' %}" class="btn btn-outline-secondary">Back</a>
 
-            </form>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 
