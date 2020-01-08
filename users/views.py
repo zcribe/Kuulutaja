@@ -13,15 +13,21 @@ class ProfileView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(ProfileView, self).get_context_data(**kwargs)
-        context['profile'] = Profile.objects.filter(user__username=self.request.user.get_username())
+        context['profile'] = Profile.objects.filter(user=self.request.user.pk)
         context['my_adverts'] = Advertisement.objects.filter(owner=self.request.user.pk)
         return context
+
 
 @method_decorator(login_required, name='dispatch')
 class ProfileUpdateView(UpdateView):
     template_name = 'users/profile_update.html'
     model = Profile
+    fields = ['bio']
+    success_url = '/accounts/profile'
 
+    def get_object(self, queryset=None):
+        obj = Profile.objects.filter(user=self.request.user)
+        return obj.get()
 
 
 @method_decorator(login_required, name='dispatch')

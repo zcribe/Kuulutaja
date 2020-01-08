@@ -23,18 +23,30 @@
                     </div>
                     <div class="card-body">
                         <h4 class="card-title">{{ user }}</h4>
-                        <small>{{ profile }}</small>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="" class="btn btn-secondary btn-sm"><i class="fas fa-edit"></i> Edit biogoraphy</a>
+                        <div class="m-2">
+                            {% if profile.bio %}
+                                <small>{{ profile.bio }}</small>
+                            {% else %}
+                                <small>Few lines describing you.{{ profile }}</small>
+                            {% endif %}
+                        </div>
+
+                        <a href="{% url 'profile-update' %}" class="btn btn-outline-info btn-sm"><i
+                                class="fas fa-edit"></i> Edit biogoraphy</a>
                     </div>
                 </div>
 
                 <ul class="list-group mt-4">
-                    <li class="list-group-item"><a href="{% url 'profile' %}" ><i class="fas fa-ad text-primary mr-2"></i>My advertisements</a></li>
-                    <li class="list-group-item"><a href="{% url 'profile-email' %}" ><i class="fas fa-envelope text-primary mr-2"></i>Email</a></li>
-                    <li class="list-group-item"><a href="{% url 'profile-password' %}" ><i class="fas fa-key text-primary mr-2"></i>Password</a></li>
-                    <li class="list-group-item"><a href="{% url 'profile-settings' %}" ><i class="fas fa-cogs text-primary mr-2"></i>Settings</a></li>
-                    <li class="list-group-item"><a href="{% url 'profile-privacy' %}" ><i class="fas fa-user-secret text-primary mr-2"></i>Privacy</a></li>
+                    <li class="list-group-item"><a href="{% url 'profile' %}" class="text-primary"><i
+                            class="fas fa-ad text-white-50 mr-2"></i>My advertisements</a></li>
+                    <li class="list-group-item"><a href="{% url 'profile-email' %}" class="text-primary"><i
+                            class="fas fa-envelope text-white-50 mr-2"></i>Email</a></li>
+                    <li class="list-group-item"><a href="{% url 'profile-password' %}" class="text-primary"><i
+                            class="fas fa-key text-white-50 mr-2"></i>Password</a></li>
+                    <li class="list-group-item"><a href="{% url 'profile-settings' %}" class="text-primary"><i
+                            class="fas fa-cogs text-white-50 mr-2"></i>Settings</a></li>
+                    <li class="list-group-item"><a href="{% url 'profile-privacy' %}" class="text-primary"><i
+                            class="fas fa-user-secret text-white-50 mr-2"></i>Privacy</a></li>
                 </ul>
 
             </div>
@@ -60,8 +72,9 @@
                 </div>
                 <div class="card mt-4">
                     <div class="card-header d-flex justify-content-between align">
-                       <h5>My advertisements</h5>
-                        <a href="{% url 'ad-create' %}" class="btn btn-primary"><i class="fas fa-plus text-white-50 mr-3"></i>Add new</a>
+                        <h5 class="h5 mt-auto mb-auto">My advertisements</h5>
+                        <a href="{% url 'ad-create' %}" class="btn btn-primary"><i
+                                class="fas fa-plus text-white-50 mr-3"></i>Add new</a>
                     </div>
                     <table class="table table-hover table-striped">
                         <thead class="thead-dark">
@@ -81,9 +94,13 @@
                             <td>Otto</td>
 
                             <td>
-                                <a href="" class="btn btn-info btn-sm"><i class="fas fa-binoculars"></i> View</a>
-                                <a href="" class="btn btn-secondary btn-sm"><i class="fas fa-edit"></i> Edit</a>
-                                <a href="" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
+                                <div class="btn-group">
+                                    <a href="" class="btn btn-outline-info btn-sm"><i class="fas fa-binoculars"></i>
+                                        View</a>
+                                    <a href="" class="btn btn-outline-secondary btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                                    <a href="" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
+                                </div>
+
                             </td>
                         </tr>
                         <tr>
@@ -94,9 +111,13 @@
 
 
                             <td>
-                                <a href="" class="btn btn-info btn-sm"><i class="fas fa-binoculars"></i> View</a>
-                                <a href="" class="btn btn-secondary btn-sm"><i class="fas fa-edit"></i> Edit</a>
-                                <a href="" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
+                                <div class="btn-group">
+                                    <a href="" class="btn btn-outline-info btn-sm"><i class="fas fa-binoculars"></i>
+                                        View</a>
+                                    <a href="" class="btn btn-outline-secondary btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                                    <a href="" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
+                                </div>
+
                             </td>
                         </tr>
 
@@ -108,9 +129,13 @@
 
 
                             <td>
-                                <a href="" class="btn btn-info btn-sm"><i class="fas fa-binoculars"></i> View</a>
-                                <a href="" class="btn btn-secondary btn-sm"><i class="fas fa-edit"></i> Edit</a>
-                                <a href="" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
+                                <div class="btn-group">
+                                    <a href="" class="btn btn-outline-info btn-sm"><i class="fas fa-binoculars"></i>
+                                        View</a>
+                                    <a href="" class="btn btn-outline-secondary btn-sm"><i class="fas fa-edit"></i> Edit</a>
+                                    <a href="" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i> Delete</a>
+                                </div>
+
                             </td>
                         </tr>
 
@@ -127,45 +152,46 @@
 
 {% endblock content %}
 {% block scripts %}
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js" integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>
-<script>
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"
+            integrity="sha256-R4pqcOYV8lt7snxMQO/HSbVCFRPMdrhAFMH+vr9giYI=" crossorigin="anonymous"></script>
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
                 }
-            }]
-        }
-    }
-});
-</script>
+            }
+        });
+    </script>
 {% endblock scripts %}
 

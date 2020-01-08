@@ -1,0 +1,28 @@
+{% extends 'base2.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}
+    Update profile
+{% endblock head_title %}
+
+{% block content %}
+    <div class="card mt-5">
+        <div class="card-header">
+            <h1>Edit biography</h1>
+        </div>
+        <div class="card-body">
+            <form method="post">{% csrf_token %}
+                {{ form|crispy }}
+
+                <input type="submit" class="btn btn-primary" value="Update">
+{#                <a class="btn btn-danger" href="{% url 'profile' %}">Back</a>#}
+
+
+            </form>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
