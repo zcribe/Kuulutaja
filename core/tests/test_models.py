@@ -1,8 +1,10 @@
+from datetime import datetime, timezone
+
 import pytest
 from django.contrib.auth import get_user_model
 
 from ..models import Category, Advertisement, AdvertisementImage
-from ..factories import AdvertisementFactory, AdvertisementImageFactory, category_factory
+from ..factories import  category_factory, AdvertisementFactoryStatic, AdvertisementImageFactoryStatic
 
 
 @pytest.mark.django_db
@@ -13,11 +15,11 @@ def test_category_create():
 
 @pytest.mark.django_db
 def test_advertisement_create():
-    AdvertisementFactory.create()
+    AdvertisementFactoryStatic.create()
     assert Advertisement.objects.count() == 1
 
 
 @pytest.mark.django_db
 def test_advertisement_image_create():
-    AdvertisementImageFactory.create()
+    AdvertisementImageFactoryStatic.create()
     assert AdvertisementImage.objects.count() == 1

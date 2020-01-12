@@ -44,11 +44,41 @@ class AdvertisementFactory(factory.django.DjangoModelFactory):
         model = Advertisement
 
 
+class AdvertisementFactoryStatic(factory.django.DjangoModelFactory):
+    """ Generates dummy advertisement object """
+    name = 'test'
+    owner_id = 1
+    category_id = 1
+    contact_email = factory.Faker('ascii_free_email')
+    contact_phone = factory.Faker('phone_number')
+    content = factory.Faker('text')
+    views = factory.Faker('random_int')
+    importance = factory.Faker('random_int')
+    expires_date = factory.Faker('date_time_this_month', tzinfo=timezone.get_current_timezone())
+    price = factory.Faker('random_int')
+    location_city = factory.Faker('address')
+    status = 'published'
+
+    class Meta:
+        model = Advertisement
+
+
 class AdvertisementImageFactory(factory.django.DjangoModelFactory):
     """ Generates dummy advertisement image object """
     description = factory.Faker('word')
     alternate_text = factory.Faker('word')
     parent_advertisement = factory.iterator(Advertisement.objects.all)
+    image = factory.django.ImageField()
+
+    class Meta:
+        model = AdvertisementImage
+
+
+class AdvertisementImageFactoryStatic(factory.django.DjangoModelFactory):
+    """ Generates dummy advertisement image object """
+    description = factory.Faker('word')
+    alternate_text = factory.Faker('word')
+    parent_advertisement_id = 1
     image = factory.django.ImageField()
 
     class Meta:
