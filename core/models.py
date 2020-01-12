@@ -2,8 +2,6 @@ from io import BytesIO
 
 from django.db import models
 from django.conf import settings
-from django.utils.text import slugify
-from django.db import IntegrityError
 from taggit.managers import TaggableManager
 from PIL import Image
 from model_utils.models import StatusModel, TimeStampedModel, SoftDeletableModel
@@ -15,6 +13,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 from .constants import MAX_ALT_LENGTH, PRICE_MAX_DECIMALS, PRICE_MAX_DIGITS, IMAGE_COMPRESSION_FORMAT, \
     IMAGE_COMPRESSION_QUALITY, NAME_MAX_LENGTH, SLUG_MAX_LENGTH, CITY_MAX_LENGTH, \
     AD_DESCRIPTION_MAX_LENGTH
+from .utils import generate_slug
 
 
 class BaseModel(TimeStampedModel, StatusModel, SoftDeletableModel):
@@ -31,23 +30,8 @@ class BaseModel(TimeStampedModel, StatusModel, SoftDeletableModel):
 
     def save(self, *args, **kwargs):
         """Auto generates slug field"""
-        try:
-            slug_prototype = slugify(self.name)
-            if len(slug_prototype) >= SLUG_MAX_LENGTH:
-                self.slug = slug_prototype[0:SLUG_MAX_LENGTH]
-            else:
-                self.slug = slug_prototype
-
-            super(BaseModel, self).save(*args, **kwargs)
-        except IntegrityError as e:
-            if 'unique constrain' in e.args:
-                slug = f"{self.name}{self.pk}"
-                slug_prototype = slugify(slug)
-                if len(slug_prototype) >= SLUG_MAX_LENGTH:
-                    self.slug = slug_prototype[0:SLUG_MAX_LENGTH]
-                else:
-                    self.slug = slug_prototype
-                super(BaseModel, self).save(*args, **kwargs)
+        self.slug = generate_slug(self.name, self.pk)
+        super(BaseModel, self).save(*args, **kwargs)
 
 
 class Category(MP_Node, BaseModel):
