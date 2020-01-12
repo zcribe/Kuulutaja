@@ -229,6 +229,5 @@ core/migrations/0011_auto_20191220_1317.py
 docs/_static/
 docs/_templates/
 media/
-static/
 .env.dev
 docker-bench-security/
