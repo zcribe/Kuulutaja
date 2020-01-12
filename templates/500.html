@@ -1,0 +1,23 @@
+{% extends "base2.html" %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+{% load static %}
+
+{% block head_title %}{% trans "Server error" %}{% endblock %}
+
+
+{% block content %}
+    <div class="card mt-5" style="width: 26rem; margin:auto;">
+        <div class="card mt-5 text-center" style="width: 26rem; margin:auto;">
+        <div class="card-body">
+            <h1 class="display-2">{% trans "Server error" %}</h1>
+            <div class="m-5">
+                <img src="{% static 'illustrations/404.svg' %}" alt="404" class="img-fluid">
+            </div>
+            <h2 class="h5 m-5">Oops. Something went wrong.</h2>
+            <a href="{% url 'index' %}" class="btn btn-primary m-3">Go back to the home page</a>
+
+        </div>
+    </div>
+    </div>
+{% endblock %}

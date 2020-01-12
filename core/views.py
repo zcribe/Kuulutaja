@@ -87,3 +87,5 @@ class AdvertUpdateView(UpdateView):
     """ Update Ad """
     model = Advertisement
     template_name = 'core/advert_update.html'
+
+
