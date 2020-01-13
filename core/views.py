@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.contrib.postgres.search import SearchQuery, SearchVector, SearchRank
 from django.db.models import Prefetch
+from django.contrib.postgres.search import TrigramSimilarity
+
 
 from allauth.account.decorators import verified_email_required
 
@@ -25,6 +27,11 @@ class IndexView(ListView):
 class AdvertListView(ListView):
     model = Advertisement
     template_name = 'core/advert_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(AdvertListView, self).get_context_data(**kwargs)
+        # context['annotated_list'] = Advertisement.objects.annotate(similarity=TrigramSimilarity('name', self.))
+        return context
 
 
 class AdvertDetailView(DetailView):
@@ -87,5 +94,3 @@ class AdvertUpdateView(UpdateView):
     """ Update Ad """
     model = Advertisement
     template_name = 'core/advert_update.html'
-
-

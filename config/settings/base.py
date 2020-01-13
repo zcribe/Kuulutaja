@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'treebeard',
     'crispy_forms',
     'imagekit',
+    'django_filters',
 
     'core',
     'users.apps.UsersConfig',

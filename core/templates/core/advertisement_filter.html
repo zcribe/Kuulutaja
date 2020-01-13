@@ -1,0 +1,14 @@
+{% extends "base2.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block content %}
+    <form action="" method="get">
+        {{ filter.form|crispy}}
+        <input type="submit" />
+    </form>
+    {% for obj in filter.qs %}
+        {{ obj.name }} - ${{ obj.price }}<br />
+    {% endfor %}
+{% endblock %}
