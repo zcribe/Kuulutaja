@@ -9,6 +9,8 @@ from model_utils import Choices
 from model_utils.managers import QueryManager
 from treebeard.mp_tree import MP_Node
 from phonenumber_field.modelfields import PhoneNumberField
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
 
 from .constants import MAX_ALT_LENGTH, PRICE_MAX_DECIMALS, PRICE_MAX_DIGITS, IMAGE_COMPRESSION_FORMAT, \
     IMAGE_COMPRESSION_QUALITY, NAME_MAX_LENGTH, SLUG_MAX_LENGTH, CITY_MAX_LENGTH, \
@@ -71,6 +73,10 @@ class AdvertisementImage(TimeStampedModel):
     alternate_text = models.CharField(default="", max_length=MAX_ALT_LENGTH)
     parent_advertisement = models.ForeignKey(Advertisement, on_delete=models.CASCADE, related_name='advertisement')
     image = models.ImageField(null=False, upload_to='ads/')
+    image_thumbnail = ImageSpecField(source='image',
+                                     processors=[ResizeToFill(100, 100)],
+                                     format='JPEG',
+                                     options={'quality': 60})
 
     def __str__(self):
         return self.description
@@ -81,4 +87,3 @@ class AdvertisementImage(TimeStampedModel):
         output_image = BytesIO()
         input_image.save(output_image, format=IMAGE_COMPRESSION_FORMAT, quality=IMAGE_COMPRESSION_QUALITY)
         super(AdvertisementImage, self).save(*args, **kwargs)
-

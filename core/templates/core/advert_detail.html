@@ -29,7 +29,8 @@
         <ol class="breadcrumb">
 
             <li class="breadcrumb-item"><a href="/">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">{{ advertisement.category }}</li>
+            <li class="breadcrumb-item" aria-current="page"><a href="{% url 'category' advertisement.category.slug %}">{{ advertisement.category }}</a></li>
+            <li class="breadcrumb-item active text-white-50" aria-current="page">{{ advertisement.name }}</li>
         </ol>
     </nav>
 
@@ -99,7 +100,7 @@
         <div class="col" style="overflow: hidden">
             <div class="card-deck mt-3">
                 <div class="card">
-                    <img src="..." class="card-img-top" alt="...">
+                    <img src="{{ advertisement.advertisement.first.image_thumbnail.url }}" class="card-img-top" alt="...">
                     <div class="card-header">
                         <img src="" alt="">
 

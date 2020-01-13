@@ -14,7 +14,8 @@
         <hr class="my-4">
         <p>To add your own advertisement you need to create a new account or log in with an existing one.</p>
         <p class="lead">
-            <a href="{% url 'account_login' %}" class="btn btn-primary text-mono btn-sm btn-secondary">Create a new account</a>
+            <a href="{% url 'account_login' %}" class="btn btn-primary text-mono btn-sm btn-secondary">Create a new
+                account</a>
         </p>
     </div>
 
@@ -105,16 +106,45 @@
             {% endfor %}
             </div></div>
 
-
-
-    <h2>Latest advertisements</h2>
+    <h2>Most popular advertisements</h2>
     <div class="card-columns">
-        {% for ad in ads %}
+        {% for ad in latest %}
 
             <div class="card">
                 <a href="advertisement/{{ ad.slug }}">
-                    <img src="https://source.unsplash.com/random" class="card-img" alt="...">
-                    {#                    <img src="{% static ad.advertisement.first.image.url %}" alt="">#}
+                    {#                    <img src="https://source.unsplash.com/random" class="card-img" alt="...">#}
+                    <img src="{% static ad.advertisement.first.image_thumbnail.url %}" alt="">
+                    <div class="card-header">
+                        <h5 class="text-white h5">{{ ad.name }} </h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text text-white-50">
+                            {{ ad.content|truncatewords:10 }}
+                        </p>
+                    </div>
+                    <div class="card-footer justify-content-between d-flex">
+                        {% if ad.price != "." %}
+                            <span style="font-weight: bold">
+                            <i class="fas fa-euro-sign"></i> {{ ad.price }}
+                            </span>
+                        {% endif %}
+                        <small class="text-muted"><i class="fas fa-eye"></i> {{ ad.views }}</small>
+                    </div>
+                </a>
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+    <h2>Latest advertisements</h2>
+    <div class="card-columns">
+        {% for ad in latest %}
+
+            <div class="card">
+                <a href="advertisement/{{ ad.slug }}">
+                    {#                    <img src="https://source.unsplash.com/random" class="card-img" alt="...">#}
+                    <img src="{% static ad.advertisement.first.image_thumbnail.url %}" alt="">
                     <div class="card-header">
                         <h5 class="text-white h5">{{ ad.name }} </h5>
                     </div>
