@@ -6,36 +6,43 @@
 {% endblock head_title %}
 
 {% block content %}
-
-
-    <h2 class="mt-3 mb-3">{{ advertisement_list.first.category }} - {{ advertisement_list.count }}</h2>
-    <div class="card-columns">
-        {% for ad in object_list %}
-
+    <div class="row mt-2">
+        <div class="col-2">
             <div class="card">
-                <a href="/advertisement/{{ ad.slug }}">
-                    {#                    <img src="{% static ad.advertisement.first.image.url %}" alt="">#}
-
-                    <img src="https://source.unsplash.com/random" alt="" class="img-fluid">
-
-
-                    <div class="card-header">
-                        <h5 class="text-white h5">{{ ad.name }} </h5>
-                    </div>
-                    <div class="card-body">
-                        {% if ad.price != "." %}
-                            <span class="text-primary  font-weight-bold"><i class="fas fa-euro-sign"></i> {{ ad.price }}</span>
-                        {% endif %}
-
-                        <p class="card-text text-white-50">
-                            {{ ad.content|truncatewords:10 }}
-                        </p>
-                    </div>
-                </a>
+                lorem
             </div>
+        </div>
+        <div class="col-10">
+            <h2 class="mt-3 mb-3">{{ advertisement_list.first.category }}: {{ advertisement_list.count }} advertisements</h2>
+            <div class="card-columns">
+                {% for ad in object_list %}
 
-        {% endfor %}
+                    <div class="card">
+                        <a href="/advertisement/{{ ad.slug }}">
+                            {#                    <img src="{% static ad.advertisement.first.image.url %}" alt="">#}
+
+                            <img src="https://source.unsplash.com/random" alt="" class="img-fluid">
+
+
+                            <div class="card-header">
+                                <h5 class="text-white h5">{{ ad.name }} </h5>
+                            </div>
+                            <div class="card-body">
+                                {% if ad.price != "." %}
+                                    <span class="text-primary  font-weight-bold"><i
+                                            class="fas fa-euro-sign"></i> {{ ad.price }}</span>
+                                {% endif %}
+
+                                <p class="card-text text-white-50">
+                                    {{ ad.content|truncatewords:10 }}
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+
+                {% endfor %}
+            </div>
+        </div>
+
     </div>
-
-
 {% endblock %}

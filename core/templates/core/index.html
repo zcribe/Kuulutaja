@@ -74,7 +74,7 @@
                     <div class="list-group">
                 {% endif %}
             {% if info.level == 1 %}
-                <h5 class="card-title">{{ item }}</h5>
+                <h5 class="card-title">{{ item }}{{ item.count }}</h5>
             {% elif info.level == 2 %}
                 <a href="/category/{{ item.slug }}">
                     {{ item }}
