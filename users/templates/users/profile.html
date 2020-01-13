@@ -199,14 +199,14 @@
                                         {#                                        TODO: Replace with slugs. Current slug method is buggy. Createview is not#}
                                         {#                                        creating slugs.#}
                                         <div class="btn-group">
-                                            <a href="{% url 'ad-detail' advert.pk %}"
+                                            <a href="{% url 'ad-detail' advert.slug %}"
                                                class="btn btn-outline-info btn-sm"><i
                                                     class="fas fa-binoculars"></i>
                                                 View</a>
-                                            <a href="{% url 'ad-update' advert.pk %}"
+                                            <a href="{% url 'ad-update' advert.slug %}"
                                                class="btn btn-outline-secondary btn-sm"><i
                                                     class="fas fa-edit"></i> Edit</a>
-                                            <a href="{% url 'ad-delete' advert.pk %}"
+                                            <a href="{% url 'ad-delete' advert.slug %}"
                                                class="btn btn-outline-danger btn-sm"><i
                                                     class="fas fa-trash"></i> Delete</a>
                                         </div>
