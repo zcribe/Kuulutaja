@@ -9,7 +9,7 @@ Automat==0.8.0
 Babel==2.7.0
 billiard==3.6.1.0
 black==19.10b0
-celery==4.4.0
+celery==4.4.2
 certifi==2019.11.28
 cffi==1.13.2
 chardet==3.0.4
