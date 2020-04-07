@@ -101,7 +101,7 @@ wcwidth==0.1.7
 zipp==0.6.0
 zope.interface==4.7.1
 redis==3.3.11
-flower==0.9.3
+flower==0.9.4
 django-celery-results==1.1.2
 django-celery-email==3.0.0
 django-phonenumber-field==4.0.0
